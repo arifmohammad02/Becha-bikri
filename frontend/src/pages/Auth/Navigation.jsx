@@ -47,16 +47,16 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   // Handle screen resize and set isMobile state
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) {
         setIsMobile(false);
-        setIsMenuOpen(false); // Close menu on larger screens
       } else {
         setIsMobile(true);
       }
     };
-    handleResize(); // Initial check when the component mounts
-    window.addEventListener("resize", handleResize); // Listen for resize events
-    return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const dispatch = useDispatch();
@@ -81,7 +81,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
     }
   };
 
-  return (
+  const MobileHeader = (
     <div className="">
       {/* Mobile Header */}
       {isMobile && (
@@ -179,7 +179,6 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
           </div>
         </div>
       )}
-
       {/* Sidebar/Menu */}
       <div
         className={`${
@@ -187,7 +186,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
             ? isMenuOpen
               ? "fixed top-0 left-0 bottom-0 w-64 bg-black z-50 p-4 h-full flex flex-col justify-between"
               : "hidden"
-            : "fixed top-0 left-0 h-screen transition-all duration-300 ease-in-out bg-black text-white p-4 w-16 lg:w-20 xl:w-24 flex flex-col justify-between z-50"
+            : "lg:hidden fixed top-0 left-0 h-screen transition-all duration-300 ease-in-out bg-black text-white p-4 w-16 lg:w-20 xl:w-24 flex flex-col justify-between z-50"
         }`}
       >
         {/* Close Button */}
@@ -208,7 +207,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
             onClick={handleItemClick}
           >
             <AiOutlineHome className="flex-none text-white" size={26} />
-            <span className="ml-4  opacity-100 transform transition-all duration-300 ease-in-out text-sm font-semibold text-white">
+            <span className="ml-4 opacity-100 transform transition-all duration-300 ease-in-out text-sm font-semibold text-white">
               Home
             </span>
           </Link>
@@ -398,6 +397,199 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
       </div>
     </div>
   );
+
+  const DesktopHeader = (
+    <div className="w-full fixed top-0 left-0 z-50 bg-white text-black shadow-md">
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        {/* Logo */}
+        <div>
+          <Link to="/" className="font-bold text-lg text-black">
+            MySite
+          </Link>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="flex gap-6">
+          <Link
+            to="/"
+            className="hover:text-blue-500 transition-all duration-300 ease-in-out"
+          >
+            Home
+          </Link>
+          <Link
+            to="/shop"
+            className="hover:text-green-500 transition-all duration-300 ease-in-out"
+          >
+            Shop
+          </Link>
+          <Link
+            to="/about"
+            className="hover:text-purple-500 transition-all duration-300 ease-in-out"
+          >
+            About Us
+          </Link>
+          <Link
+            to="/contact"
+            className="hover:text-yellow-500 transition-all duration-300 ease-in-out"
+          >
+            Contact Us
+          </Link>
+        </div>
+
+        {/* Icons Section */}
+        <div className="flex items-center gap-6">
+          {!userInfo ? (
+            <>
+              {/* Login */}
+              <Link
+                to="/login"
+                className="hover:text-blue-500 transition-all duration-300 ease-in-out"
+              >
+                <AiOutlineLogin size={24} />
+              </Link>
+
+              {/* Favorites */}
+              <Link
+                to="/favorite"
+                className="relative flex items-center hover:text-red-500 transition-all duration-300 ease-in-out"
+              >
+                <FaHeart size={24} />
+                <div className="absolute top-0 left-4">
+                  <FavoritesCount />
+                </div>
+              </Link>
+
+              {/* Cart */}
+              <Link
+                to="/cart"
+                className="relative flex items-center hover:text-yellow-500 transition-all duration-300 ease-in-out"
+              >
+                <AiOutlineShoppingCart size={24} />
+                {cartItems?.length > 0 && (
+                  <span className="absolute -top-2 left-5 px-2 py-0 text-sm text-white bg-pink-500 rounded-full">
+                    {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                  </span>
+                )}
+              </Link>
+            </>
+          ) : (
+            <>
+              {/* Favorites */}
+              <Link
+                to="/favorite"
+                className="relative flex items-center hover:text-red-500 transition-all duration-300 ease-in-out"
+              >
+                <FaHeart size={24} />
+                <div className="absolute -top-2 left-4">
+                  <FavoritesCount />
+                </div>
+              </Link>
+
+              {/* Cart */}
+              <Link
+                to="/cart"
+                className="relative flex items-center hover:text-yellow-500 transition-all duration-300 ease-in-out"
+              >
+                <AiOutlineShoppingCart size={24} />
+                {cartItems?.length > 0 && (
+                  <span className="absolute -top-2 left-5 px-2 py-0 text-sm text-white bg-pink-500 rounded-full">
+                    {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                  </span>
+                )}
+              </Link>
+
+              {/* Profile */}
+              <div className="relative">
+                <button
+                  onClick={toggleTab}
+                  className="hover:text-purple-500 transition-all duration-300 ease-in-out"
+                >
+                  <FaUserCircle size={24} />
+                </button>
+                {tabOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md p-2 z-50">
+                    <Link
+                      to="/profile"
+                      className="flex items-center hover:text-emerald-500 transition-all duration-300 ease-in-out pb-3"
+                      onClick={handleItemClick}
+                    >
+                      <FaUserCircle className="flex-none " size={26} />
+                      <span className="ml-4 text-sm font-semibold">
+                        Profile
+                      </span>
+                    </Link>
+                    {userInfo.isAdmin && (
+                      <div className="flex flex-col space-y-6 mb-8">
+                        <Link
+                          to="/admin/dashboard"
+                          className="flex items-center hover:text-lime-300 transition-all duration-300 ease-in-out"
+                          onClick={handleItemClick}
+                        >
+                          <FaTachometerAlt className="flex-none" size={26} />
+                          <span className="ml-4 text-sm font-semibold">
+                            Dashboard
+                          </span>
+                        </Link>
+                        <Link
+                          to="/admin/productlist"
+                          className="flex items-center hover:text-orange-500 transition-all duration-300 ease-in-out"
+                          onClick={handleItemClick}
+                        >
+                          <FaBox className="flex-none" size={26} />
+                          <span className="ml-4 text-sm font-semibold">
+                            Products
+                          </span>
+                        </Link>
+                        <Link
+                          to="/admin/categorylist"
+                          className="flex items-center hover:text-orange-500 transition-all duration-300 ease-in-out"
+                          onClick={handleItemClick}
+                        >
+                          <FaListAlt className="flex-none" size={26} />
+                          <span className="ml-4 text-sm font-semibold">
+                            Category
+                          </span>
+                        </Link>
+                        <Link
+                          to="/admin/orderlist"
+                          className="flex items-center hover:text-orange-500 transition-all duration-300 ease-in-out"
+                          onClick={handleItemClick}
+                        >
+                          <FaClipboardList className="flex-none" size={26} />
+                          <span className="ml-4 text-sm font-semibold">
+                            Orders
+                          </span>
+                        </Link>
+                        <Link
+                          to="/admin/userlist"
+                          className="flex items-center hover:text-orange-500 transition-all duration-300 ease-in-out"
+                          onClick={handleItemClick}
+                        >
+                          <FaUsers className="flex-none" size={26} />
+                          <span className="ml-4 text-sm font-semibold">
+                            Users
+                          </span>
+                        </Link>
+                      </div>
+                    )}
+                    <button
+                      onClick={logoutHandler}
+                      className="flex items-center hover:text-fuchsia-400 transition-all duration-300 ease-in-out"
+                    >
+                      <FaSignOutAlt className="flex-none" size={26} />
+                      <span className="ml-4 text-sm font-semibold">Logout</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  return isMobile ? MobileHeader : DesktopHeader;
 };
 
 export default Navigation;

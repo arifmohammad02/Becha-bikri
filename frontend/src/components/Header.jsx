@@ -15,13 +15,13 @@ const Header = () => {
   }
 
   return (
-    <>
-     <div className="pr-3 pt-5 pl-[80px] sm:pl-[85px] lg:pl-[120px] 2xl:pl-0">
+    <div className="">
+     <div className="py-12">
      <ProductCarousel />
      </div>
-      <div className="flex justify-between gap-5">
+      <div className="container mx-auto flex justify-between gap-5">
         <div className="w-full">
-          <div className="pl-[80px] sm:pl-[85px] lg:pl-[120px] pr-3 2xl:pl-0 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 md:gap-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 md:gap-3">
             {data.map((product) => (
               <div key={product._id}>
                 <SmallProduct product={product} />
@@ -31,7 +31,7 @@ const Header = () => {
         </div>
        
       </div>
-    </>
+    </div>
   );
 };
 

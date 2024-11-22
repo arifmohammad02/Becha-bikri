@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navigation from "./pages/Auth/Navigation";
 import Loader from "./components/Loader";
 import { useEffect, useState } from "react";
+import Footer from "./components/Footer";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -45,13 +46,14 @@ function App() {
   }
 
   return (
-    <>
+    <div>
       <ToastContainer />
       <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <main className="main-content">
         <Outlet />
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }
 
