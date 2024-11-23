@@ -28,17 +28,17 @@ const ProductTabs = ({
   };
 
   return (
-    <div className="flex flex-col lg:flex-row ">
+    <div className="flex flex-col lg:flex-row bg-white p-6 space-y-4 lg:space-y-0">
       {/* Tabs Section */}
-      <section className="lg:w-1/4 p-4 space-y-2 border-r border-gray-700">
+      <section className="lg:w-1/4 p-4 space-y-2 lg:border-r border-gray-300">
         {["Write Your Review", "All Reviews", "Related Products"].map(
           (tab, index) => (
             <div
               key={index}
-              className={`cursor-pointer text-lg py-2 px-4 rounded transition duration-200 ${
+              className={`cursor-pointer text-lg py-2 px-4 rounded-lg transition duration-200 ${
                 activeTab === index + 1
-                  ? "font-bold bg-yellow-300 text-gray-900"
-                  : "hover:bg-gray-700 text-gray-300"
+                  ? "font-semibold bg-yellow-300 text-gray-900 border-2 border-yellow-500"
+                  : "hover:bg-gray-100 hover:text-gray-800 text-gray-600"
               }`}
               onClick={() => handleTabClick(index + 1)}
             >
@@ -52,13 +52,13 @@ const ProductTabs = ({
       <section className="lg:w-3/4 p-4">
         {/* Write Your Review */}
         {activeTab === 1 && (
-          <div className="mt-4">
+          <div className="mt-4 bg-gray-50 p-6 rounded-lg shadow-md">
             {userInfo ? (
               <form onSubmit={submitHandler}>
                 <div className="my-4">
                   <label
                     htmlFor="rating"
-                    className="block text-xl mb-2 text-white"
+                    className="block text-xl mb-2 text-gray-900 font-semibold"
                   >
                     Rating
                   </label>
@@ -67,7 +67,7 @@ const ProductTabs = ({
                     required
                     value={rating}
                     onChange={(e) => setRating(e.target.value)}
-                    className="p-2 border rounded-lg w-full lg:w-2/3 text-gray-900"
+                    className="p-2 border rounded-lg w-full lg:w-2/3 text-gray-900 focus:ring-2 focus:ring-yellow-500"
                   >
                     <option value="">Select</option>
                     <option value="1">Inferior</option>
@@ -81,7 +81,7 @@ const ProductTabs = ({
                 <div className="my-4">
                   <label
                     htmlFor="comment"
-                    className="block text-xl mb-2 text-white"
+                    className="block text-xl mb-2 text-gray-900 font-semibold"
                   >
                     Comment
                   </label>
@@ -91,25 +91,25 @@ const ProductTabs = ({
                     required
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    className="p-2 border rounded-lg w-full lg:w-2/3 text-gray-900"
+                    className="p-2 border rounded-lg w-full lg:w-2/3 text-gray-900 focus:ring-2 focus:ring-yellow-500"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={loadingProductReview}
-                  className="bg-pink-600 text-white py-2 px-4 rounded-lg hover:bg-pink-700 transition duration-300"
+                  className="bg-pink-600 text-white py-2 px-4 rounded-lg hover:bg-pink-700 transition duration-300 w-full lg:w-1/3 mx-auto"
                 >
                   Submit
                 </button>
               </form>
             ) : (
-              <p>
+              <p className="text-gray-800">
                 Please{" "}
                 <Link to="/login" className="text-yellow-400 underline">
                   sign in
                 </Link>{" "}
-                to write a review
+                to write a review.
               </p>
             )}
           </div>
@@ -124,7 +124,7 @@ const ProductTabs = ({
               product.reviews.map((review) => (
                 <div
                   key={review._id}
-                  className="bg-gray-800 p-4 rounded-lg shadow-md transition hover:shadow-lg"
+                  className="bg-gray-800 p-4 rounded-lg shadow-md transition hover:shadow-xl hover:bg-gray-700"
                 >
                   <div className="flex justify-between text-gray-300 ">
                     <strong className="ml-5">{review.name}</strong>
@@ -140,13 +140,16 @@ const ProductTabs = ({
 
         {/* Related Products */}
         {activeTab === 3 && (
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
             {!data ? (
               <Loader />
             ) : (
               data.map((product) => (
-                <div key={product._id}>
-                  <SmallProduct product={product} className="transition" />
+                <div
+                  key={product._id}
+                  className="transition-transform duration-300 hover:scale-105"
+                >
+                  <SmallProduct product={product} className="transition-all" />
                 </div>
               ))
             )}

@@ -22,8 +22,8 @@ const Home = () => {
             </Message>
           ) : (
             <>
-              <div className="flex justify-between items-center pl-[80px] sm:pl-[90px] lg:pl-[120px] pr-3 2xl:pl-0">
-                <h1 className="mt-[10rem] text-white text-xl font-bold lg:text-[3rem]">
+              <div className="flex justify-between items-center">
+                <h1 className="mt-[10rem] text-xl font-bold lg:text-[3rem] text-black">
                   Special Products
                 </h1>
 
@@ -36,7 +36,7 @@ const Home = () => {
               </div>
 
               <div>
-                <div className="pl-[80px] sm:pl-[85px] lg:pl-[120px] pr-3 2xl:pl-0 grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-1 md:gap-3 py-5 w-full">
+                <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 py-2 xl:py-5 w-full">
                   {data.products.map((product) => (
                     <div key={product._id}>
                       <Product product={product} />

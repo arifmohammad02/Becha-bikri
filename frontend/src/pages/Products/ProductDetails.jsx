@@ -78,17 +78,19 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen h-full">
-      <div className="pb-10 2xl:max-w-screen-2xl mx-auto">
-        <div className="py-4 lg:pl-[120px]">
+    <div className="bg-white min-h-screen h-full pt-12 px-6 container mx-auto">
+      <div className="pb-10 ">
+        {/* Go Back Link */}
+        <div className="py-4">
           <Link
             to="/"
-            className="text-white font-semibold hover:underline hover:text-yellow-400 transition-all"
+            className="text-gray-800 font-semibold hover:underline hover:text-pink-600 transition-all"
           >
             Go Back
           </Link>
         </div>
 
+        {/* Product Section */}
         {isLoading ? (
           <Loader />
         ) : error ? (
@@ -97,13 +99,13 @@ const ProductDetails = () => {
           </Message>
         ) : (
           <div className="flex flex-col">
-            <div className="pl-[80px] sm:pl-[85px] lg:pl-[120px] pr-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Product Image Section */}
-              <div className="relative w-full">
+              <div className="relative w-full border-2 border-gray-300 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="rounded-lg object-cover w-full p-3 overflow-hidden mb-4 shadow-md transition-transform duration-300 hover:scale-102 hover:shadow-2xl hover:shadow-pink-500/50"
+                  className="rounded-lg object-cover w-full p-3 transition-transform duration-300 hover:scale-102"
                 />
                 <div className="absolute top-4 right-4 2xl:right-20">
                   <HeartIcon product={product} />
@@ -111,10 +113,10 @@ const ProductDetails = () => {
               </div>
 
               {/* Product Details Section */}
-              <div className="flex flex-col w-full text-gray-100 px-4 py-6">
+              <div className="flex flex-col w-full text-gray-800 py-6">
                 {/* Product Title */}
                 <div>
-                  <h2 className="text-[24px] font-bold text-yellow-300">
+                  <h2 className="text-[24px] font-bold text-black">
                     {isExpanded
                       ? product.name
                       : product.name.substring(0, 80) +
@@ -125,16 +127,16 @@ const ProductDetails = () => {
                   {product.name.length > 80 && (
                     <button
                       onClick={() => setIsExpanded(!isExpanded)}
-                      className="text-pink-400 text-sm mt-2 hover:underline"
+                      className="text-pink-500 text-sm mt-2 hover:underline"
                     >
                       {isExpanded ? "See Less" : "See More"}
                     </button>
                   )}
                 </div>
-                <p className="my-4 text-gray-400 max-w-lg text-[15px]">
+                <p className="my-4 text-gray-600 max-w-lg text-[15px]">
                   {product.description}
                 </p>
-                <p className="text-4xl font-extrabold text-pink-500">
+                <p className="text-4xl font-extrabold text-black">
                   BDT-{product.price}
                 </p>
 
@@ -142,15 +144,15 @@ const ProductDetails = () => {
                   {/* Brand and Stock Info */}
                   <div className="w-full sm:w-1/2">
                     <h1 className="flex items-center mb-4">
-                      <FaStore className="mr-2 text-yellow-300" /> Brand:{" "}
+                      <FaStore className="mr-2 text-pink-600" /> Brand:{" "}
                       {product.brand}
                     </h1>
                     <h1 className="flex items-center mb-4">
-                      <FaClock className="mr-2 text-yellow-300" /> Added:{" "}
+                      <FaClock className="mr-2 text-pink-600" /> Added:{" "}
                       {moment(product.createAt).fromNow()}
                     </h1>
                     <h1 className="flex items-center mb-4">
-                      <FaStar className="mr-2 text-yellow-300" /> Reviews:{" "}
+                      <FaStar className="mr-2 text-pink-600" /> Reviews:{" "}
                       {product.numReviews}
                     </h1>
                   </div>
@@ -158,21 +160,21 @@ const ProductDetails = () => {
                   {/* Ratings and Quantity Info */}
                   <div className="w-full sm:w-1/2">
                     <h1 className="flex items-center mb-4">
-                      <FaStar className="mr-2 text-yellow-300" /> Ratings:{" "}
+                      <FaStar className="mr-2 text-pink-600" /> Ratings:{" "}
                       {rating}
                     </h1>
                     <h1 className="flex items-center mb-4">
-                      <FaShoppingCart className="mr-2 text-yellow-300" />{" "}
+                      <FaShoppingCart className="mr-2 text-pink-600" />{" "}
                       Quantity: {product.quantity}
                     </h1>
                     <h1 className="flex items-center mb-4">
-                      <FaBox className="mr-2 text-yellow-300" /> In Stock:{" "}
+                      <FaBox className="mr-2 text-pink-600" /> In Stock:{" "}
                       {product.countInStock}
                     </h1>
                   </div>
                 </div>
 
-                {/* Add to Cart Button */}
+                {/* Add to Cart Section */}
                 <div className="flex items-center space-x-4 mt-4">
                   <Ratings
                     value={product.rating}
@@ -182,7 +184,7 @@ const ProductDetails = () => {
                     <select
                       value={qty}
                       onChange={(e) => setQty(e.target.value)}
-                      className="p-2 w-[5rem] rounded-lg text-gray-800"
+                      className="p-2 w-[5rem] rounded-lg text-gray-800 border-2 border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-500"
                     >
                       {[...Array(product.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
@@ -196,7 +198,7 @@ const ProductDetails = () => {
                 <button
                   onClick={addToCartHandler}
                   disabled={product.countInStock === 0}
-                  className="bg-pink-600 text-white w-fit py-2 px-6 rounded-lg mt-4 shadow-md hover:bg-pink-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50"
+                  className="bg-pink-600 text-white w-fit py-2 px-6 rounded-lg mt-4 shadow-md hover:bg-pink-700 hover:scale-105 transition-all duration-300 disabled:opacity-50"
                 >
                   Add To Cart
                 </button>
@@ -204,19 +206,17 @@ const ProductDetails = () => {
             </div>
 
             {/* Review Section */}
-            <div className="pl-[80px] sm:pl-[85px] lg:pl-[120px] pr-3">
-              <div className="w-full mt-8 bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ">
-                <ProductTabs
-                  loadingProductReview={loadingProductReview}
-                  userInfo={userInfo}
-                  submitHandler={submitHandler}
-                  rating={rating}
-                  setRating={setRating}
-                  comment={comment}
-                  setComment={setComment}
-                  product={product}
-                />
-              </div>
+            <div className="w-full mt-8 bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+              <ProductTabs
+                loadingProductReview={loadingProductReview}
+                userInfo={userInfo}
+                submitHandler={submitHandler}
+                rating={rating}
+                setRating={setRating}
+                comment={comment}
+                setComment={setComment}
+                product={product}
+              />
             </div>
           </div>
         )}

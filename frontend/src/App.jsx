@@ -45,14 +45,17 @@ function App() {
     );
   }
 
+  // Footer দেখানোর জন্য শর্ত
+  const shouldShowFooter = !["/login", "/register"].includes(location.pathname);
+
   return (
     <div>
       <ToastContainer />
       <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <main className="main-content">
         <Outlet />
+        {shouldShowFooter && <Footer />}
       </main>
-      <Footer />
     </div>
   );
 }

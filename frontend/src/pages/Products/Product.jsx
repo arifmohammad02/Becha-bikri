@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link,  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import HeartIcon from "./HeartIcon";
 
@@ -15,30 +15,33 @@ const Product = ({ product }) => {
     return name;
   };
 
-
-
   return (
     <div className="relative mt-8">
-      <div className="relative bg-gray-800 p-2 sm:p-4 rounded-lg shadow-md transition-all transform duration-300 hover:shadow-2xl hover:bg-gray-900">
-        <div className="bg-gray-800 p-2 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition">
+      {/* Card container with white background */}
+      <div className="relative bg-white p-2 sm:p-4 rounded-lg shadow-md border border-gray-300 hover:border-blue-500 hover:shadow-xl  hover:scale-102 transition-all duration-300">
+        <div className="p-2 sm:p-4">
           <div className="w-full relative overflow-hidden rounded-lg">
+            {/* Product Image */}
             <Link to={`/product/${product._id}`}>
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-[15rem] object-cover rounded-lg bg-gray-800 shadow-lg shadow-gray-600 duration-300 transform transition-all hover:shadow-xl"
+                className="w-full h-[15rem] object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-102"
               />
             </Link>
+
+            {/* Heart Icon */}
             <HeartIcon
               product={product}
               className="absolute top-2 right-2 text-pink-500 hover:text-pink-600"
             />
           </div>
 
-          <div className="flex flex-col gap-3 items-start">
+          {/* Product Details */}
+          <div className="flex flex-col gap-3 items-start mt-4">
             <Link to={`/product/${product._id}`}>
-              <h2 className="flex flex-col items-start text-white text-[14px] xl:text-[17] font-semibold mt-2">
-                <span >{truncateName(product.name)}</span>
+              <h2 className="text-gray-800 text-[14px] xl:text-[17px] font-semibold">
+                {truncateName(product.name)}
               </h2>
             </Link>
 
@@ -46,12 +49,14 @@ const Product = ({ product }) => {
             {product.name.split(" ").length > 4 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="text-pink-400 text-xs mt-1 hover:underline"
+                className="text-blue-500 text-xs hover:underline"
               >
                 {isExpanded ? "See Less" : "See More"}
               </button>
             )}
-            <span className="bg-pink-500 text-white px-3 py-1 rounded-lg text-sm font-medium">
+
+            {/* Product Price */}
+            <span className="bg-green-500 text-white px-3 py-1 rounded-lg text-sm font-medium">
               BDT {product.price}
             </span>
           </div>

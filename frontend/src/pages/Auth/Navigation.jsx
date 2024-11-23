@@ -454,7 +454,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
                 className="relative flex items-center hover:text-red-500 transition-all duration-300 ease-in-out"
               >
                 <FaHeart size={24} />
-                <div className="absolute top-0 left-4">
+                <div className="absolute -top-[42px] left-2">
                   <FavoritesCount />
                 </div>
               </Link>
@@ -466,8 +466,10 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
               >
                 <AiOutlineShoppingCart size={24} />
                 {cartItems?.length > 0 && (
-                  <span className="absolute -top-2 left-5 px-2 py-0 text-sm text-white bg-pink-500 rounded-full">
-                    {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                  <span className="absolute -top-2 left-5 px-1 py-0 text-sm text-white bg-pink-500 rounded-full">
+                    {cartItems && cartItems.length > 0
+                      ? cartItems.reduce((acc, item) => acc + item.qty, 0)
+                      : 0}
                   </span>
                 )}
               </Link>
@@ -480,7 +482,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
                 className="relative flex items-center hover:text-red-500 transition-all duration-300 ease-in-out"
               >
                 <FaHeart size={24} />
-                <div className="absolute -top-2 left-4">
+                <div className="absolute -top-[42px] left-2">
                   <FavoritesCount />
                 </div>
               </Link>
@@ -492,7 +494,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
               >
                 <AiOutlineShoppingCart size={24} />
                 {cartItems?.length > 0 && (
-                  <span className="absolute -top-2 left-5 px-2 py-0 text-sm text-white bg-pink-500 rounded-full">
+                  <span className="absolute -top-2 left-5 px-1 py-0 text-sm text-white bg-pink-500 rounded-full">
                     {cartItems.reduce((acc, item) => acc + item.qty, 0)}
                   </span>
                 )}

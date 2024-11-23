@@ -2,13 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 import { addToCart, removeFromCart } from "../redux/features/cart/cartSlice";
-import { useEffect, useState } from "react";
-import Loader from "../components/Loader";
-import pexels from "../assets/banner/pexels.jpg";
+
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
@@ -27,160 +26,137 @@ const Cart = () => {
       navigate("/login?redirect=/shipping");
     }
   };
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading delay
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer); // Cleanup timer
-  }, []);
-
   return (
-    <div className=" min-h-screen text-white">
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className="bg-white">
-          <div className="">
-            {cartItems.length === 0 ? (
-              <div className="text-black text-2xl font-bold">
-                <div className="relative">
-                  <img
-                    src={pexels}
-                    alt=""
-                    className="w-full object-cover h-80"
-                  />
-                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl">
-                    / Your cart is empty{" "}
-                    <Link to="/shop" className="text-underline">
-                      / Go To Shop
-                    </Link>
-                  </span>
-                </div>
+    <div className="pt-12 ">
+      <div className="container flex justify-around items-start wrap mx-auto mt-8 pb-12">
+        {cartItems.length === 0 ? (
+          <div>
+            Your cart is empty <Link to="/shop">Go To Shop</Link>
+          </div>
+        ) : (
+          <>
+            <div className="w-full mx-auto mt-8 bg-white p-6 rounded-lg shadow-lg border border-gray-300 transition-shadow duration-300">
+              <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">
+                Shopping Cart
+              </h1>
+
+              {/* Cart Table */}
+              <div className="overflow-x-auto ">
+                <table className="min-w-full bg-white text-black rounded-lg border  border-gray-300 ">
+                  <thead>
+                    <tr className="border-b border-gray-300">
+                      <th className="py-4 px-6 text-left">Product</th>
+                      <th className="py-4 px-6 text-left">Price</th>
+                      <th className="py-4 px-6 text-left">Quantity</th>
+                      <th className="py-4 px-6 text-left">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cartItems.map((item) => (
+                      <tr
+                        key={item._id}
+                        className="border-b border-gray-300 hover:bg-gray-100 transition-colors duration-200"
+                      >
+                        <td className="py-4 px-6 flex items-center">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-[5rem] h-[5rem] object-cover rounded-lg border border-gray-200 shadow-sm"
+                          />
+                          <Link
+                            to={`/product/${item._id}`}
+                            className="hidden lg:block ml-4 text-pink-500 hover:text-pink-700 transition-colors duration-200 max-w-[500px]"
+                          >
+                            {item.name}
+                          </Link>
+                        </td>
+                        <td className="py-4 px-6">BDT {item.price}</td>
+                        <td className="py-4 px-6">
+                          <select
+                            className="w-[5rem] p-1 border rounded text-black focus:outline-none focus:ring-2 focus:ring-pink-500"
+                            value={item.qty}
+                            onChange={(e) =>
+                              addToCartHandler(item, Number(e.target.value))
+                            }
+                          >
+                            {[...Array(item.countInStock).keys()].map((x) => (
+                              <option key={x + 1} value={x + 1}>
+                                {x + 1}
+                              </option>
+                            ))}
+                          </select>
+                        </td>
+                        <td className="py-4 px-6">
+                          <button
+                            className="text-red-500 hover:text-red-700 transition-colors duration-200"
+                            onClick={() => removeFromCartHandler(item._id)}
+                          >
+                            <FaTrash className="ml-2" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            ) : (
-              <>
-                <div className="relative">
-                  <img
-                    src={pexels}
-                    alt=""
-                    className="w-full object-cover h-80"
-                  />
-                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10 text-black font-bold">
-                    Your Shopping Cart
-                  </span>
+
+              {/* Summary Section as Table */}
+              <div className="flex flex-col pt-5 lg:pt-0 lg:flex-row items-center justify-between">
+                <div className="w-full lg:max-w-[40rem]">
+                  <p className="text-lg font-bold pb-2">Cash on delivery</p>
+                  <p>
+                    {" "}
+                    সর্বোচ্চ ৪-৫ দিন (ঢাকায়) এবং ৫-৭ দিন (ঢাকার বাহিরে) সময়ের
+                    মধ্যে হোম ডেলিভারী করা হয়।
+                  </p>
                 </div>
-                <div className="container mx-auto p-4">
-                  {/* Cart Items */}
-                  {cartItems.map((item) => (
-                    <div
-                      key={item._id}
-                      className="flex items-center justify-between border-b border-gray-300 py-4"
-                    >
-                      {/* Image */}
-                      <div className="w-20 h-20">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-full object-cover rounded"
-                        />
-                      </div>
-
-                      {/* Item Details */}
-                      <div className="flex-1 ml-4">
-                        <Link
-                          to={`/product/${item._id}`}
-                          className="text-pink-500 text-lg"
-                        >
-                          {item.name}
-                        </Link>
-                        <div className="text-gray-500 text-sm">
-                          {item.brand}
-                        </div>
-                        <div className="text-black font-bold">
-                          ${item.price}
-                        </div>
-                      </div>
-
-                      {/* Quantity Controls */}
-                      <div className="flex items-center space-x-4">
-                        {/* Decrease Quantity Button */}
-                        <button
-                          className="w-10 h-10 border rounded-full flex items-center justify-center bg-gradient-to-r from-red-500 to-pink-500 text-white hover:shadow-lg hover:scale-105 transition-transform"
-                          onClick={() =>
-                            item.qty > 1 && addToCartHandler(item, item.qty - 1)
-                          }
-                        >
-                          -
-                        </button>
-
-                        {/* Quantity Display */}
-                        <span className="px-6 py-2 border rounded-full bg-gray-200 text-lg font-semibold shadow-md">
-                          {item.qty}
-                        </span>
-
-                        {/* Increase Quantity Button */}
-                        <button
-                          className="w-10 h-10 border rounded-full flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 text-white hover:shadow-lg hover:scale-105 transition-transform"
-                          onClick={() => addToCartHandler(item, item.qty + 1)}
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Special Instructions & Cart Totals */}
-                  <div className="mt-8 flex items-end justify-end gap-8">
-                    {/* Cart Totals */}
-
-                    <div className="w-1/3 border rounded p-4">
-                      <h3 className="text-lg font-semibold mb-2 text-black">
-                        Cart Totals
-                      </h3>
-                      <div className="flex justify-between mb-2 text-black">
-                        <span>Subtotal</span>
-                        <span>
-                          BDT
+                <div className="mt-8 w-full lg:max-w-[40rem] p-4 border-2 border-gray-300 rounded-lg">
+                  <table className="min-w-full bg-white text-black rounded-lg shadow-md border border-gray-300">
+                    <thead>
+                      <tr className="border-b border-gray-300">
+                        <th className="py-4 px-6 text-left text-gray-700">
+                          Total Items
+                        </th>
+                        <th className="py-4 px-6 text-left text-gray-700">
+                          Total Price
+                        </th>
+                        <th className="py-4 px-6 text-left text-gray-700">
+                          Checkout
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-300 hover:bg-gray-100 transition-colors duration-200">
+                        <td className="py-4 px-6">
+                          {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                        </td>
+                        <td className="py-4 px-6 text-[14px] md:text-2xl font-bold">
+                          BDT{" "}
                           {cartItems
                             .reduce(
                               (acc, item) => acc + item.qty * item.price,
                               0
                             )
                             .toFixed(2)}
-                        </span>
-                      </div>
-                      <div className="flex justify-between font-bold text-xl">
-                        <span className="text-black">Total</span>
-                        <span className="text-black">
-                          BDT   
-                          {cartItems
-                            .reduce(
-                              (acc, item) => acc + item.qty * item.price,
-                               0
-                            )
-                            .toFixed(2)}
-                        </span>
-                      </div>
-                      <button
-                        className="bg-pink-500 w-full mt-4 py-2 text-white rounded hover:bg-pink-600"
-                        disabled={cartItems.length === 0}
-                        onClick={checkoutHandler}
-                      >
-                        Proceed To Checkout
-                      </button>
-                    </div>
-                  </div>
+                        </td>
+                        <td className="py-4 px-6">
+                          <button
+                            className="bg-pink-500 py-1 px-2 md:py-2 md:px-4 rounded-md text-[12px] md:text-lg w-full hover:bg-pink-600 transition-colors duration-200 active:bg-pink-700 focus:outline-none"
+                            disabled={cartItems.length === 0}
+                            onClick={checkoutHandler}
+                          >
+                            Proceed To Checkout
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

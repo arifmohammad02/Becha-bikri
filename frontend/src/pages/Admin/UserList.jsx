@@ -56,23 +56,23 @@ const UserList = () => {
   };
 
   return (
-    <div className="p-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black shadow-xl rounded-xl min-h-screen">
-      <h1 className="text-2xl font-semibold text-gray-200 mb-6 text-center">
+    <div className="p-4 bg-white shadow-xl rounded-xl min-h-screen">
+      <h1 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
         Users
       </h1>
       {isLoading ? (
-        <div className=" text-center text-white">Loading...</div>
+        <div className="text-center text-gray-700">Loading...</div>
       ) : error ? (
         <Message variant="danger">
           {error?.data?.message || error.error}
         </Message>
       ) : (
         <div className="flex flex-col md:flex-row">
-          <AdminMenu/>
-          <div className="w-full md:w-4/5 mx-auto bg-gray-800 rounded-lg shadow-2xl overflow-hidden">
-            <div className="max-h-[80vh] overflow-y-auto">
+          <AdminMenu />
+          <div className="w-full md:w-4/5 mx-auto bg-gray-50 rounded-lg shadow-2xl overflow-hidden">
+            <div className="max-h-[80vh] overflow-x-auto">
               <table className="w-full">
-                <thead className="sticky top-0 bg-gray-700 z-10">
+                <thead className="sticky top-0 bg-gray-800 text-white z-10">
                   <tr>
                     <th className="px-4 py-3 text-left text-gray-300">ID</th>
                     <th className="px-4 py-3 text-left text-gray-300">NAME</th>
@@ -85,10 +85,10 @@ const UserList = () => {
                   {users.map((user) => (
                     <tr
                       key={user._id}
-                      className="hover:bg-gray-700 transition-colors duration-300"
+                      className="hover:bg-gray-100 transition-colors duration-300 border-b border-gray-300"
                     >
-                      <td className="px-4 py-3 text-gray-400">{user._id}</td>
-                      <td className="px-4 py-3 text-gray-200">
+                      <td className="px-4 py-3 text-gray-600">{user._id}</td>
+                      <td className="px-4 py-3 text-gray-800">
                         {editableUserId === user._id ? (
                           <div className="flex items-center">
                             <input
@@ -97,7 +97,7 @@ const UserList = () => {
                               onChange={(e) =>
                                 setEditableUserName(e.target.value)
                               }
-                              className="w-full p-2 border border-gray-500 rounded-lg bg-gray-700 text-gray-300 focus:border-blue-500 transition-colors duration-200"
+                              className="w-full p-2 border border-gray-500 rounded-lg bg-gray-100 text-gray-800 focus:border-blue-500 transition-colors duration-200"
                             />
                             <button
                               onClick={() => updateHandler(user._id)}
@@ -108,21 +108,21 @@ const UserList = () => {
                           </div>
                         ) : (
                           <div className="flex items-center">
-                            <span className="text-gray-300">
+                            <span className="text-gray-900">
                               {user.username}
                             </span>
                             <button
                               onClick={() =>
                                 toggleEdit(user._id, user.username, user.email)
                               }
-                              className="ml-4 text-blue-400 hover:text-blue-500 transition duration-200"
+                              className="ml-4 text-blue-500 hover:text-blue-600 transition duration-200"
                             >
                               <FaEdit />
                             </button>
                           </div>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-gray-200">
+                      <td className="px-4 py-3 text-gray-800">
                         {editableUserId === user._id ? (
                           <div className="flex items-center">
                             <input
@@ -131,7 +131,7 @@ const UserList = () => {
                               onChange={(e) =>
                                 setEditableUserEmail(e.target.value)
                               }
-                              className="w-full p-2 border border-gray-500 rounded-lg bg-gray-700 text-gray-300 focus:border-blue-500 transition-colors duration-200"
+                              className="w-full p-2 border border-gray-500 rounded-lg bg-gray-100 text-gray-800 focus:border-blue-500 transition-colors duration-200"
                             />
                             <button
                               onClick={() => updateHandler(user._id)}
@@ -144,7 +144,7 @@ const UserList = () => {
                           <div className="flex items-center">
                             <a
                               href={`mailto:${user.email}`}
-                              className="text-gray-300 hover:text-gray-100 transition duration-200"
+                              className="text-gray-900 hover:text-gray-700 transition duration-200"
                             >
                               {user.email}
                             </a>
@@ -152,14 +152,14 @@ const UserList = () => {
                               onClick={() =>
                                 toggleEdit(user._id, user.name, user.email)
                               }
-                              className="ml-4 text-blue-400 hover:text-blue-500 transition duration-200"
+                              className="ml-4 text-blue-500 hover:text-blue-600 transition duration-200"
                             >
                               <FaEdit />
                             </button>
                           </div>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-gray-200">
+                      <td className="px-4 py-3 text-gray-800">
                         {user.isAdmin ? (
                           <FaCheck className="text-green-500" />
                         ) : (
