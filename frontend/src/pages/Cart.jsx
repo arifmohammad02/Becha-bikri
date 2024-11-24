@@ -110,27 +110,27 @@ const Cart = () => {
                     মধ্যে হোম ডেলিভারী করা হয়।
                   </p>
                 </div>
-                <div className="mt-8 w-full lg:max-w-[40rem] p-4 border-2 border-gray-300 rounded-lg">
+                <div className="mt-8 w-full lg:max-w-[40rem] p-2 md:p-4 border-2 border-gray-300 rounded-lg">
                   <table className="min-w-full bg-white text-black rounded-lg shadow-md border border-gray-300">
                     <thead>
                       <tr className="border-b border-gray-300">
-                        <th className="py-4 px-6 text-left text-gray-700">
+                        <th className="py-1 md:py-2 px-2 md:px-4 text-xs md:text-xl text-left  text-gray-700">
                           Total Items
                         </th>
-                        <th className="py-4 px-6 text-left text-gray-700">
+                        <th className="py-1 md:py-2 px-2 md:px-4 text-xs md:text-xl text-left text-gray-700">
                           Total Price
                         </th>
-                        <th className="py-4 px-6 text-left text-gray-700">
+                        <th className="py-1 md:py-2 px-2 md:px-4 text-xs md:text-xl text-left text-gray-700">
                           Checkout
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr className="border-b border-gray-300 hover:bg-gray-100 transition-colors duration-200">
-                        <td className="py-4 px-6">
+                        <td className="py-1 md:py-2 px-2 md:px-4">
                           {cartItems.reduce((acc, item) => acc + item.qty, 0)}
                         </td>
-                        <td className="py-4 px-6 text-[14px] md:text-2xl font-bold">
+                        <td className="py-1 md:py-2 px-2 md:px-4 text-[11px] md:text-2xl font-bold">
                           BDT{" "}
                           {cartItems
                             .reduce(
@@ -139,7 +139,7 @@ const Cart = () => {
                             )
                             .toFixed(2)}
                         </td>
-                        <td className="py-4 px-6">
+                        <td className="py-1 md:py-2 px-2 md:px-4">
                           <button
                             className="bg-pink-500 py-1 px-2 md:py-2 md:px-4 rounded-md text-[12px] md:text-lg w-full hover:bg-pink-600 transition-colors duration-200 active:bg-pink-700 focus:outline-none"
                             disabled={cartItems.length === 0}
