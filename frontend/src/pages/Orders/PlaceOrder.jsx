@@ -164,41 +164,41 @@ const PlaceOrder = () => {
               <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
                 <thead className="bg-indigo-600 text-white">
                   <tr>
-                    <th className="py-2 px-4 text-left">Item</th>
-                    <th className="py-2 px-4 text-left">Price</th>
+                    <th className="py-1 md:py-2 px-2 md:px-4 text-left">Item</th>
+                    <th className="py-1 md:py-2 px-2 md:px-4 text-left">Price</th>
                   </tr>
                 </thead>
                 <tbody className="text-gray-700">
                   <tr className="hover:bg-gray-100 border-b">
-                    <td className="py-2 px-4">
+                    <td className="py-1 md:py-2 px-2 md:px-4">
                       <span className="font-semibold text-indigo-600">
                         Items:
                       </span>
                     </td>
-                    <td className="py-2 px-4">BDT- {cart.itemsPrice}</td>
+                    <td className="py-1 md:py-2 px-2 md:px-4">BDT- {cart.itemsPrice}</td>
                   </tr>
                   <tr className="hover:bg-gray-100 border-b">
-                    <td className="py-2 px-4">
+                    <td className="py-1 md:py-2 px-2 md:px-4">
                       <span className="font-semibold text-indigo-600">
                         Shipping:
                       </span>
                     </td>
-                    <td className="py-2 px-4">BDT- {cart.shippingPrice}</td>
+                    <td className="py-1 md:py-2 px-2 md:px-4">BDT- {cart.shippingPrice}</td>
                   </tr>
                   <tr className="hover:bg-gray-100">
-                    <td className="py-2 px-4">
+                    <td className="py-1 md:py-2 px-2 md:px-4">
                       <span className="font-semibold text-indigo-600">
                         Tax:
                       </span>
                     </td>
-                    <td className="py-2 px-4">BDT- {cart.taxPrice}</td>
+                    <td className="py-1 md:py-2 px-2 md:px-4">BDT- {cart.taxPrice}</td>
                   </tr>
                   {/* Highlighted Total Row */}
                   <tr className="bg-yellow-200 hover:bg-yellow-300">
-                    <td className="py-2 px-4 font-bold text-indigo-800">
+                    <td className="py-1 md:py-2 px-2 md:px-4 font-bold text-indigo-800">
                       <span className="font-extrabold">Total:</span>
                     </td>
-                    <td className="py-2 px-4 font-bold text-indigo-800">
+                    <td className="py-1 md:py-2 px-2 md:px-4 font-bold text-indigo-800">
                       BDT- {cart.totalPrice}
                     </td>
                   </tr>
