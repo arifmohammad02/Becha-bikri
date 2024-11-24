@@ -54,7 +54,7 @@ const Shipping = () => {
   }, [navigate, shippingAddress]);
 
   return (
-    <div className="container mx-auto mt-10">
+    <div className="container mx-auto mt-10 px-3 md:px-0">
       <ProgressSteps step1 step2 />
       <div className="w-full flex justify-center py-5">
         <form

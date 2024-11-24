@@ -82,11 +82,11 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   };
 
   const MobileHeader = (
-    <div className="">
+    <div>
       {/* Mobile Header */}
       {isMobile && (
-        <div className=" w-full fixed top-0 left-0 z-50">
-          <div className="flex justify-between items-center p-4 bg-black text-white">
+        <div className="w-full fixed top-0 left-0 z-50 bg-black px-3 sm:px-0">
+          <div className="flex justify-between items-center py-4 container mx-auto text-white">
             <span className="font-semibold">Menu</span>
 
             {/* User Login / Cart / Favorites */}
@@ -400,7 +400,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
 
   const DesktopHeader = (
     <div className="w-full fixed top-0 left-0 z-50 bg-white text-black shadow-md">
-      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+      <div className="container mx-auto flex justify-between items-center py-4">
         {/* Logo */}
         <div>
           <Link to="/" className="font-bold text-lg text-black">

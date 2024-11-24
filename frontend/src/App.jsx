@@ -5,6 +5,7 @@ import Navigation from "./pages/Auth/Navigation";
 import Loader from "./components/Loader";
 import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
+import ServiceTag from "./components/ServiceTag";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -52,10 +53,9 @@ function App() {
     <div>
       <ToastContainer />
       <Navigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <main className="main-content">
-        <Outlet />
-        {shouldShowFooter && <Footer />}
-      </main>
+      <Outlet />
+      {shouldShowFooter && <ServiceTag />}
+      {shouldShowFooter && <Footer />}
     </div>
   );
 }

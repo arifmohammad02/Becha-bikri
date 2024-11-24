@@ -28,7 +28,7 @@ const ProductTabs = ({
   };
 
   return (
-    <div className="flex flex-col lg:flex-row bg-white p-6 space-y-4 lg:space-y-0">
+    <div className="flex flex-col lg:flex-row bg-white md:p-6 space-y-4 lg:space-y-0">
       {/* Tabs Section */}
       <section className="lg:w-1/4 p-4 space-y-2 lg:border-r border-gray-300">
         {["Write Your Review", "All Reviews", "Related Products"].map(
@@ -147,7 +147,7 @@ const ProductTabs = ({
               data.map((product) => (
                 <div
                   key={product._id}
-                  className="transition-transform duration-300 hover:scale-105"
+                  className="transition-transform duration-300 hover:scale-102"
                 >
                   <SmallProduct product={product} className="transition-all" />
                 </div>

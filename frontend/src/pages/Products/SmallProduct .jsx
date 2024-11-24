@@ -8,8 +8,8 @@ const SmallProduct = ({ product }) => {
   // Function to truncate the product name after 4 words
   const truncateName = (name) => {
     const words = name.split(" ");
-    if (words.length > 4 && !isExpanded) {
-      return words.slice(0, 4).join(" ") + "...";
+    if (words.length > 3 && !isExpanded) {
+      return words.slice(0, 3).join(" ") + "...";
     }
     return name;
   };
@@ -45,7 +45,7 @@ const SmallProduct = ({ product }) => {
             </Link>
 
             {/* Show "See More" or "See Less" button */}
-            {product.name.split(" ").length > 4 && (
+            {product.name.split(" ").length > 3 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="text-blue-500 text-xs hover:underline mb-2"

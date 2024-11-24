@@ -36,7 +36,7 @@ const Home = () => {
               </div>
 
               <div>
-                <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 py-2 xl:py-5 w-full">
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3 py-2 xl:py-5 w-full">
                   {data.products.map((product) => (
                     <div key={product._id}>
                       <Product product={product} />

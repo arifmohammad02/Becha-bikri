@@ -99,13 +99,13 @@ const ProductDetails = () => {
           </Message>
         ) : (
           <div className="flex flex-col">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Product Image Section */}
-              <div className="relative w-full border-2 border-gray-300 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="relative w-full border-2  border-gray-300 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="rounded-lg object-cover w-full p-3 transition-transform duration-300 hover:scale-102"
+                  className="rounded-lg object-cover w-full max-h-[650px] p-3 transition-transform duration-300 hover:scale-102"
                 />
                 <div className="absolute top-4 right-4 2xl:right-20">
                   <HeartIcon product={product} />
@@ -206,7 +206,7 @@ const ProductDetails = () => {
             </div>
 
             {/* Review Section */}
-            <div className="w-full mt-8 bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+            <div className="w-full mt-8 bg-gray-100 border border-gray-300 rounded-lg overflow-hidden">
               <ProductTabs
                 loadingProductReview={loadingProductReview}
                 userInfo={userInfo}
