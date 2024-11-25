@@ -10,26 +10,26 @@ const AdminMenu = () => {
   };
 
   return (
-    <div>
+    <div >
       <button
         className={`${
-          isMenuOpen ? "top-2 right-2" : "top-5 right-7"
-        } bg-[#151515] p-2 fixed rounded-lg`}
+          isMenuOpen ? "top-20 right-2" : "top-20 right-7"
+        } bg-[#FFF] border p-2 fixed rounded-lg`}
         onClick={toggleMenu}
       >
         {isMenuOpen ? (
-          <FaTimes color="white" />
+          <FaTimes color="black" />
         ) : (
-          <>
-            <div className="w-6 h-0.5 bg-gray-200 my-1"></div>
-            <div className="w-6 h-0.5 bg-gray-200 my-1"></div>
-            <div className="w-6 h-0.5 bg-gray-200 my-1"></div>
-          </>
+          <div  className="">
+            <div className="w-6 h-0.5 bg-gray-600 my-1"></div>
+            <div className="w-6 h-0.5 bg-gray-800 my-1"></div>
+            <div className="w-6 h-0.5 bg-gray-500 my-1"></div>
+          </div>
         )}
       </button>
 
       {isMenuOpen && (
-        <section className="bg-[#151515] p-4 fixed right-7 top-5 z-50">
+        <section className="bg-[#151515] p-4 fixed right-7 top-24 z-50">
           <ul className="list-none mt-2">
             <li>
               <NavLink

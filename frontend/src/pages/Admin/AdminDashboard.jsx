@@ -92,54 +92,57 @@ const AdminDashboard = () => {
     <>
       <AdminMenu />
 
-      <section className="xl:ml-[4rem] md:ml-[0rem]">
-        <div className="w-[80%] flex justify-around flex-wrap">
-          <div className="rounded-lg bg-white p-5 w-[20rem] mt-5">
-            <div className="font-bold rounded-full w-[3rem] bg-pink-500 text-center p-3">
-              $
-            </div>
-
-            <p className="mt-5">Sales</p>
-            <h1 className="text-xl font-bold">
-              $ {isLoading ? <Loader /> : sales.totalSales.toFixed(2)}
+      <section className="bg-gray-100 py-10 mt-10 container mx-auto">
+        {/* Summary Cards */}
+        <div className="flex flex-wrap justify-center gap-6 px-3 md:px-0">
+          {/* Sales Card */}
+          <div className="rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transition duration-300 w-full sm:w-[18rem] lg:w-[20rem]">
+            <p className="text-gray-500 text-lg font-medium">Sales</p>
+            <h1 className="text-2xl font-bold text-gray-800 mt-2">
+              BDT {isLoading ? "Loading..." : sales.totalSales.toFixed(2)}
             </h1>
           </div>
-          <div className="rounded-lg bg-white p-5 w-[20rem] mt-5">
-            <div className="font-bold rounded-full w-[3rem] bg-pink-500 text-center p-3">
-              $
-            </div>
 
-            <p className="mt-5">Customers</p>
-            <h1 className="text-xl font-bold">
-              $ {isLoading ? <Loader /> : customers?.length}
+          {/* Customers Card */}
+          <div className="rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transition duration-300 w-full sm:w-[18rem] lg:w-[20rem]">
+            <p className="text-gray-500 text-lg font-medium">Customers</p>
+            <h1 className="text-2xl font-bold text-gray-800 mt-2">
+              {isLoading ? "Loading..." : customers?.length}
             </h1>
           </div>
-          <div className="rounded-lg bg-white p-5 w-[20rem] mt-5">
-            <div className="font-bold rounded-full w-[3rem] bg-pink-500 text-center p-3">
-              $
-            </div>
 
-            <p className="mt-5">All Orders</p>
-            <h1 className="text-xl font-bold">
-              $ {isLoading ? <Loader /> : orders?.totalOrders}
+          {/* Orders Card */}
+          <div className="rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transition duration-300 w-full sm:w-[18rem] lg:w-[20rem]">
+            <p className="text-gray-500 text-lg font-medium">All Orders</p>
+            <h1 className="text-2xl font-bold text-gray-800 mt-2">
+              {isLoading ? "Loading..." : orders?.totalOrders}
             </h1>
           </div>
         </div>
 
-        <div className="ml-[10rem] mt-[4rem]">
-          <Chart
-            options={state.options}
-            series={state.series}
-            type="bar"
-            width="70%"
-          />
+        {/* Chart Section */}
+        <div className="flex justify-center mt-16 px-4">
+          <div className="w-full sm:w-[90%] lg:w-[70%]">
+            <Chart
+              options={state.options}
+              series={state.series}
+              type="bar"
+              width="100%"
+              className="rounded-lg shadow-lg bg-white p-5"
+            />
+          </div>
         </div>
 
-        <div className="mt-[4rem]">
-          <OrderList />
+        {/* Order List Section */}
+        <div className="mt-8">
+          <h2 className="text-xl font-bold text-gray-700 px-3 md:px-0">Recent Orders</h2>
+          <div className="overflow-auto">
+            <OrderList />
+          </div>
         </div>
       </section>
     </>
+
   );
 };
 

@@ -22,11 +22,11 @@ const Header = () => {
       </div>
       <div className="container mx-auto flex justify-between gap-5">
         <div className="w-full">
-          <div className="flex justify-between items-center py-2 md:py-5 px-3">
+          <div className="flex justify-between items-center py-2 md:py-5 px-3 md:px-0">
             <h1 className="text-xl font-bold lg:text-[3rem] text-black">Best Products</h1>
             <Link to="/shop" className="text-pink-600 cursor-pointer">All Products</Link>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 px-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 px-3 md:px-0">
             {data.map((product) => (
               <div key={product._id}>
                 <SmallProduct product={product} />

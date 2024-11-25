@@ -16,7 +16,7 @@ const SmallProduct = ({ product }) => {
 
   return (
     <div className="py-2 md:py-5 ">
-      <div className="p-2 sm:p-4 rounded-lg bg-white shadow-md border border-gray-300 hover:border-blue-500 hover:shadow-xl hover:scale-102 transition-all duration-300">
+      <div className="sm:p-4 rounded-lg bg-white shadow-md border border-gray-300 hover:border-blue-500 hover:shadow-xl hover:scale-102 transition-all duration-300">
         <div className="bg-white p-2 sm:p-4 rounded-lg">
           <div>
             <div className="relative">
@@ -28,7 +28,7 @@ const SmallProduct = ({ product }) => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full object-cover h-[15rem] transition-transform duration-300 ease-in-out transform hover:scale-102"
+                  className="w-full object-cover h-[13rem] transition-transform duration-300 ease-in-out transform hover:scale-102"
                 />
               </Link>
               {/* Heart Icon */}

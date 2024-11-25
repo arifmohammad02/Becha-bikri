@@ -26,7 +26,7 @@ const Product = ({ product }) => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-[15rem] object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-102"
+                className="w-full h-[13rem] object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-102"
               />
             </Link>
 

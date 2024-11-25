@@ -21,6 +21,7 @@ const Order = () => {
     error,
   } = useGetOrderDetailsQuery(orderId);
 
+  // eslint-disable-next-line no-unused-vars
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
   const [deliverOrder, { isLoading: loadingDeliver }] =
     useDeliverOrderMutation();
@@ -28,7 +29,6 @@ const Order = () => {
 
   const handleCODPayment = async () => {
     try {
-      // COD পেমেন্ট সম্পন্ন করার জন্য API কল
       await payOrder({
         orderId,
         details: { paymentMethod: "Cash On Delivery" },

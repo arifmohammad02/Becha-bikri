@@ -59,81 +59,79 @@ const Profile = () => {
   };
 
   return (
-    <div className="py-5 bg-gradient-to-r from-gray-900 via-gray-800 to-black shadow-xl min-h-screen flex items-center">
-      <div className="w-full flex items-center justify-center pr-3 pl-[80px] sm:pl-[85px] lg:pl-[120px] 2xl:pl-0">
-        <div className="w-full lg:w-1/2 bg-gray-800 p-6 rounded-lg shadow-2xl">
-          <h2 className="text-xl text-start sm:text-2xl md:text-3xl font-semibold mb-4 md:text-center text-white">
-            Update Profile
-          </h2>
-          <form onSubmit={submitHandler}>
-            <div className="mb-6">
-              <label className="block text-gray-300 mb-2">Name</label>
-              <input
-                type="text"
-                placeholder="Enter name"
-                className="form-input p-4 rounded-lg w-full border-2 border-transparent bg-gray-700 text-white focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500 transition duration-200"
-                value={username}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
+    <div className="py-5 min-h-screen flex items-center justify-center px-3 pt-20 bg-white">
+      <div className="w-full max-w-2xl p-8 rounded-lg bg-white border">
+        <h2 className="text-3xl font-semibold text-gray-800 text-center mb-6">
+          Update Profile
+        </h2>
+        <form onSubmit={submitHandler} className="space-y-6">
+          <div className="mb-4">
+            <label className="block text-gray-600 mb-2">Name</label>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              className="w-full p-4 rounded-lg border-2 border-gray-300 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
 
-            <div className="mb-6">
-              <label className="block text-gray-300 mb-2">Email Address</label>
-              <input
-                type="email"
-                placeholder="Enter email"
-                className="form-input p-4 rounded-lg w-full border-2 border-transparent bg-gray-700 text-white focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500 transition duration-200"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+          <div className="mb-4">
+            <label className="block text-gray-600 mb-2">Email Address</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full p-4 rounded-lg border-2 border-gray-300 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-            <div className="mb-6">
-              <label className="block text-gray-300 mb-2">Password</label>
-              <input
-                type="password"
-                placeholder="Enter password"
-                className="form-input p-4 rounded-lg w-full border-2 border-transparent bg-gray-700 text-white focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500 transition duration-200"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+          <div className="mb-4">
+            <label className="block text-gray-600 mb-2">Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              className="w-full p-4 rounded-lg border-2 border-gray-300 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-            <div className="mb-6">
-              <label className="block text-gray-300 mb-2">
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                placeholder="Confirm password"
-                className="form-input p-4 rounded-lg w-full border-2 border-transparent bg-gray-700 text-white focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500 transition duration-200"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </div>
+          <div className="mb-6">
+            <label className="block text-gray-600 mb-2">Confirm Password</label>
+            <input
+              type="password"
+              placeholder="Confirm your password"
+              className="w-full p-4 rounded-lg border-2 border-gray-300 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition duration-200"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
 
-            <div className="flex justify-between">
-              <button
-                type="submit"
-                className="bg-pink-500 text-white py-2 px-2 sm:px-6 text-xs sm:text-xl rounded-lg hover:bg-pink-600 focus:outline-none transition duration-200 transform hover:scale-105"
-              >
-                Update
-              </button>
+          <div className="flex justify-between items-center">
+            <button
+              type="submit"
+              className="bg-pink-500 text-white py-2 px-6 rounded-lg text-lg hover:bg-pink-600 transition duration-200 transform hover:scale-105"
+            >
+              Update
+            </button>
 
-              <Link
-                to="/user-orders"
-                className="bg-pink-600 text-white py-2 px-2 sm:px-6 text-xs sm:text-xl rounded-lg hover:bg-pink-700 focus:outline-none transition duration-200 transform hover:scale-105"
-              >
-                My Orders
-              </Link>
-            </div>
-            {loadingUpdateProfile && (
-              <div className="text-white">Loading...</div>
-            )}
-          </form>
-        </div>
+            <Link
+              to="/user-orders"
+              className="bg-pink-600 text-white py-2 px-6 rounded-lg text-lg hover:bg-pink-700 transition duration-200 transform hover:scale-105"
+            >
+              My Orders
+            </Link>
+          </div>
+
+          {loadingUpdateProfile && (
+            <div className="text-center text-gray-500">Loading...</div>
+          )}
+        </form>
       </div>
     </div>
+
   );
 };
 

@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 const ProductUpdate = () => {
   const params = useParams();
-  const { data: productData  } = useGetProductByIdQuery(params._id);
+  const { data: productData } = useGetProductByIdQuery(params._id);
 
   const [image, setImage] = useState(productData?.image || "");
   const [name, setName] = useState(productData?.name || "");
@@ -62,7 +62,7 @@ const ProductUpdate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Input validation
     if (!image) {
       toast.error("Please upload an image.");
@@ -96,7 +96,7 @@ const ProductUpdate = () => {
       toast.error("Please enter a valid stock count.");
       return;
     }
-  
+
     setUpdateLoading(true);
     try {
       const formData = new FormData();
@@ -108,9 +108,9 @@ const ProductUpdate = () => {
       formData.append("quantity", quantity);
       formData.append("brand", brand);
       formData.append("countInStock", stock);
-  
+
       const data = await updateProduct({ productId: params._id, formData });
-  
+
       if (data?.error) {
         toast.error(data.error);
       } else {
@@ -124,7 +124,7 @@ const ProductUpdate = () => {
       setUpdateLoading(false);
     }
   };
-  
+
 
   const handleDelete = async () => {
     let answer = window.confirm("Are you sure you want to delete this product?");
@@ -144,157 +144,157 @@ const ProductUpdate = () => {
   };
 
   return (
-    <div className="p-5 min-h-screen h-full bg-[#121212] shadow-xl shadow-[#000000a0] transition-all duration-300 pr-3 pl-[80px] sm:pl-[85px] lg:pl-[120px] 2xl:pl-0">
-      <div>
-        <div className="flex flex-col justify-center md:flex-row gap-6 h-full">
-          <AdminMenu />
-          <div className="md:w-3/4 p-5 bg-[#1e1e1e] rounded-lg shadow-lg shadow-[#00000080] transition duration-300 hover:shadow-2xl">
-            <div className="text-[20px] md:text-2xl font-bold text-white mb-5 border-b border-gray-700 pb-3">
-              Update / Delete Product
-            </div>
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-5 mt-10">
+      <div className="flex flex-col lg:flex-row gap-8 w-full max-w-6xl">
+        {/* Admin Menu */}
+        <AdminMenu />
 
-            {image && (
-              <div className="text-center mb-4">
-                <img
-                  src={image}
-                  alt="product"
-                  className="block mx-auto max-h-[200px] h-[200px] w-auto rounded-lg border border-gray-700 shadow-md hover:shadow-lg transition-all duration-300 object-contain"
-                />
-              </div>
-            )}
+        {/* Product Update/Delete Section */}
+        <div className="w-full bg-white rounded-md p-8 border">
+          <h1 className="text-2xl font-bold text-gray-800 mb-5 border-b pb-3">
+            Update / Delete Product
+          </h1>
 
-            <div className="mb-5">
-              <label className="border border-gray-600 bg-[#2c2c2c] text-white px-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11 hover:bg-[#3a3a3a] transition-all duration-300">
-                {uploadLoading ? "Uploading..." : "Upload Image"}
-                <input
-                  type="file"
-                  name="image"
-                  accept="image/*"
-                  onChange={uploadFileHandler}
-                  className="hidden"
-                />
-              </label>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label htmlFor="name" className="text-white">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  className="p-4 w-full border border-gray-700 rounded-lg bg-[#101011] text-white outline-none focus:ring-2 focus:ring-pink-600 transition-all duration-300"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="price" className="text-white">
-                  Price
-                </label>
-                <input
-                  min="0"
-                  inputMode="numeric"
-                  type="number"
-                  className="p-4 w-full border border-gray-700 rounded-lg bg-[#101011] text-white outline-none focus:ring-2 focus:ring-pink-600 transition-all duration-300"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                  style={{ appearance: "textfield" }}
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label htmlFor="quantity" className="text-gray-300">
-                  Quantity
-                </label>
-                <input
-                  min="0"
-                  inputMode="numeric"
-                  type="number"
-                  className="p-4 w-full border border-gray-700 rounded-lg bg-[#101011] text-white outline-none focus:ring-2 focus:ring-pink-600 transition-all duration-300"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                  style={{ appearance: "textfield" }}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="brand" className="text-white">
-                  Brand
-                </label>
-                <input
-                  type="text"
-                  className="p-4 w-full border border-gray-700 rounded-lg bg-[#101011] text-white outline-none focus:ring-2 focus:ring-pink-600 transition-all duration-300"
-                  value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <label htmlFor="description" className="text-gray-300">
-                Description
-              </label>
-              <textarea
-                className="p-4 w-full border border-gray-700 rounded-lg bg-[#101011] text-white outline-none focus:ring-2 focus:ring-pink-600 transition-all duration-300"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+          {/* Product Image */}
+          {image && (
+            <div className="text-center mb-6">
+              <img
+                src={image}
+                alt="product"
+                className="mx-auto max-h-52 w-auto rounded-lg border shadow-md hover:shadow-lg transition duration-300"
               />
             </div>
+          )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label htmlFor="stock" className="text-white">
-                  Count In Stock
-                </label>
-                <input
-                  type="text"
-                  className="p-4 w-full border border-gray-700 rounded-lg bg-[#101011] text-white outline-none focus:ring-2 focus:ring-pink-600 transition-all duration-300"
-                  value={stock}
-                  onChange={(e) => setStock(e.target.value)}
-                />
-              </div>
+          {/* Image Upload */}
+          <div className="mb-6">
+            <label className="block w-full text-center text-gray-700 bg-gray-100 border border-gray-300 rounded-lg cursor-pointer py-5 font-medium hover:bg-gray-200 transition duration-300">
+              {uploadLoading ? "Uploading..." : "Upload Image"}
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={uploadFileHandler}
+                className="hidden"
+              />
+            </label>
+          </div>
 
-              <div>
-                <label htmlFor="category" className="text-gray-300">
-                  Category
-                </label>
-                <select
-                  className="p-4 w-full border border-gray-700 rounded-lg bg-[#101011] text-white outline-none focus:ring-2 focus:ring-pink-600 transition-all duration-300"
-                  onChange={(e) => setCategory(e.target.value)}
-                >
-                  <option value="">Choose Category</option>
-                  {categories.map((c) => (
-                    <option key={c._id} value={c._id} selected={category === c._id}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          {/* Product Information */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label htmlFor="name" className="text-gray-600 font-medium">
+                Name
+              </label>
+              <input
+                type="text"
+                className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-50 transition"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
-
-            <div className="flex gap-4">
-              <button
-                className="p-2 sm:p-4 text-xs md:text-xl w-full text-center font-bold text-white rounded-lg bg-[#5c5c5c] hover:bg-pink-600 shadow-lg shadow-pink-500/40 transition-all duration-300"
-                onClick={handleSubmit}
-              >
-                {updateLoading ? "Updating..." : "Update Product"}
-              </button>
-
-              <button
-                className="p-2 sm:p-4 text-xs md:text-xl w-full text-center font-bold text-white rounded-lg bg-red-700 hover:bg-red-600 shadow-lg shadow-red-500/40 transition-all duration-300"
-                onClick={handleDelete}
-              >
-                {deleteLoading ? "Deleting..." : "Delete Product"}
-              </button>
+            <div>
+              <label htmlFor="price" className="text-gray-600 font-medium">
+                Price
+              </label>
+              <input
+                type="number"
+                className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-50 transition"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                min="0"
+              />
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label htmlFor="quantity" className="text-gray-600 font-medium">
+                Quantity
+              </label>
+              <input
+                type="number"
+                className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-50 transition"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                min="0"
+              />
+            </div>
+            <div>
+              <label htmlFor="brand" className="text-gray-600 font-medium">
+                Brand
+              </label>
+              <input
+                type="text"
+                className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-50 transition"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="mb-6">
+            <label htmlFor="description" className="text-gray-600 font-medium">
+              Description
+            </label>
+            <textarea
+              className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-50 transition"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label htmlFor="stock" className="text-gray-600 font-medium">
+                Count In Stock
+              </label>
+              <input
+                type="number"
+                className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-50 transition"
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
+                min="0"
+              />
+            </div>
+            <div>
+              <label htmlFor="category" className="text-gray-600 font-medium">
+                Category
+              </label>
+              <select
+                className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-50 transition"
+                onChange={(e) => setCategory(e.target.value)}
+                value={category}
+              >
+                <option value="">Choose Category</option>
+                {categories.map((c) => (
+                  <option key={c._id} value={c._id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex gap-4">
+            <button
+              className="w-full p-3 text-white bg-pink-500 rounded-lg hover:bg-pink-600 transition shadow-lg"
+              onClick={handleSubmit}
+            >
+              {updateLoading ? "Updating..." : "Update Product"}
+            </button>
+            <button
+              className="w-full p-3 text-white bg-red-500 rounded-lg hover:bg-red-600 transition shadow-lg"
+              onClick={handleDelete}
+            >
+              {deleteLoading ? "Deleting..." : "Delete Product"}
+            </button>
           </div>
         </div>
       </div>
     </div>
+
   );
 };
 

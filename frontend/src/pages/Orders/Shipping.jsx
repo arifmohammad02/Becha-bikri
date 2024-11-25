@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Imp
 import {
   saveShippingAddress,
   savePaymentMethod,
@@ -32,19 +34,28 @@ const Shipping = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(
-      saveShippingAddress({
-        address,
-        city,
-        postalCode,
-        country,
-        phoneNumber,
-        alternatePhoneNumber,
-        email,
-      })
-    );
-    dispatch(savePaymentMethod(paymentMethod));
-    navigate("/placeorder");
+    // Input validations
+
+      toast.success("All inputs are valid! Proceeding...", {
+        position: "bottom-right",
+        theme: "colored",
+      });
+
+      // Dispatch actions
+      dispatch(
+        saveShippingAddress({
+          address,
+          city,
+          postalCode,
+          country,
+          phoneNumber,
+          alternatePhoneNumber,
+          email,
+        })
+      );
+      dispatch(savePaymentMethod(paymentMethod));
+      navigate("/placeorder");
+   
   };
 
   useEffect(() => {
@@ -54,7 +65,7 @@ const Shipping = () => {
   }, [navigate, shippingAddress]);
 
   return (
-    <div className="container mx-auto mt-10 px-3 md:px-0">
+    <div className="container mx-auto mt-20 px-3 md:px-0">
       <ProgressSteps step1 step2 />
       <div className="w-full flex justify-center py-5">
         <form

@@ -13,7 +13,7 @@ const Home = () => {
     <div className="bg-white min-h-screen h-full">
       <div className="">
         {!keyword ? <Header /> : null}
-        <div className="container mx-auto p-4 pt-6">
+        <div className="container mx-auto py-4 px-3 md:px-0 pt-6">
           {isLoading ? (
             <Loader />
           ) : isError ? (
@@ -29,14 +29,14 @@ const Home = () => {
 
                 <Link
                   to="/shop"
-                  className="bg-pink-600 font-bold rounded-md py-1 px-3 text-white mt-[10rem]"
+                  className="bg-pink-600 font-bold rounded-md py-1 px-3 md:px-0 text-white mt-[10rem]"
                 >
                   Shop
                 </Link>
               </div>
 
               <div>
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3 py-2 xl:py-5 w-full">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-3 py-2 xl:py-5 w-full">
                   {data.products.map((product) => (
                     <div key={product._id}>
                       <Product product={product} />

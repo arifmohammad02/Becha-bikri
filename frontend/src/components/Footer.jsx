@@ -1,4 +1,4 @@
-import React from "react";
+
 import { FaFacebook, FaWhatsapp } from "react-icons/fa6";
 
 const Footer = () => {
@@ -41,24 +41,24 @@ const Footer = () => {
         </nav>
         <div className="flex justify-center mt-8 space-x-6">
           <a
+            // eslint-disable-next-line react/no-unknown-property
             _blank="true"
             href="https://www.facebook.com/eonlinesolution1?mibextid=ZbWKwL"
             className="text-gray-400 hover:text-gray-500"
           >
             <span className="sr-only">Facebook</span>
-            <FaFacebook classNameName="text-3xl hover:text-[#316FF6]" />
+            <FaFacebook className="text-3xl hover:text-[#316FF6]" />
           </a>
 
           <a href="#" className="text-gray-400">
             <span className="sr-only">Whatsapp</span>
-            <FaWhatsapp classNameName="text-3xl hover:text-[#075E54]" />
+            <FaWhatsapp className="text-3xl hover:text-[#075E54]" />
           </a>
         </div>
         <p className="mt-8 text-base leading-6 text-center text-gray-400">
           © 2024 E-online-solution. All rights reserved.
         </p>
       </div>
-          
     </footer>
   );
 };

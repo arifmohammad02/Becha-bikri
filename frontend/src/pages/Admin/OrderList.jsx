@@ -17,7 +17,7 @@ const OrderList = () => {
           {error?.data?.message || error.error}
         </Message>
       ) : (
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-3 md:px-0 ">
           {/* Horizontal Scroll Container with Arrows */}
           <div className="relative overflow-x-auto max-w-full">
             {/* Left Arrow */}
@@ -30,34 +30,36 @@ const OrderList = () => {
 
             {/* Table */}
             <div id="scrollable-table" className="overflow-x-auto">
-              <table className="w-full bg-white shadow-lg rounded-lg overflow-hidden">
+              <table className="w-full bg-white overflow-hidden">
                 <AdminMenu />
 
                 {/* Table Header */}
-                <thead className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white">
-                  <tr>
-                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg">
+                <thead className="border bg-pink-100 text-black">
+                  <tr >
+                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg border-r">
                       ITEMS
                     </th>
-                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg">
+                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg border-r">
                       ID
                     </th>
-                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg">
+                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg border-r">
                       USER
                     </th>
-                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg">
+                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg border-r">
                       DATE
                     </th>
-                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg">
+                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg border-r">
                       TOTAL
                     </th>
-                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg">
+                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg border-r">
                       PAID
                     </th>
-                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg">
+                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg border-r">
                       DELIVERED
                     </th>
-                    <th className="text-left px-4 py-3"></th>
+                    <th className="text-left px-4 py-3 text-sm sm:text-base md:text-lg border">
+                      Action
+                    </th>
                   </tr>
                 </thead>
 
@@ -66,7 +68,7 @@ const OrderList = () => {
                   {orders.map((order) => (
                     <tr
                       key={order._id}
-                      className="hover:bg-gray-100 transition-all duration-200 border-b border-gray-300"
+                      className="hover:bg-gray-100 transition-all duration-200 border-l border-r  border-b border-gray-300"
                     >
                       {/* Item Image */}
                       <td className="px-4 py-3">
@@ -96,7 +98,7 @@ const OrderList = () => {
 
                       {/* Total Price */}
                       <td className="px-4 py-3 font-semibold text-indigo-600 text-xs sm:text-sm md:text-base">
-                        $ {order.totalPrice}
+                        BDT {order.totalPrice}
                       </td>
 
                       {/* Paid Status */}

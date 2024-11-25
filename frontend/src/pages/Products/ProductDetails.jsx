@@ -105,7 +105,7 @@ const ProductDetails = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="rounded-lg object-cover w-full max-h-[650px] p-3 transition-transform duration-300 hover:scale-102"
+                  className="rounded-lg  w-fit max-h-[520px] p-5 transition-transform duration-300 hover:scale-102"
                 />
                 <div className="absolute top-4 right-4 2xl:right-20">
                   <HeartIcon product={product} />

@@ -1,40 +1,94 @@
+
+
+// eslint-disable-next-line react/prop-types
 const ProgressSteps = ({ step1, step2, step3 }) => {
-    return (
-      <div className="flex justify-center items-center space-x-4 pt-12 bg-white p-8 ">
-  <div className={`${step1 ? "text-green-500" : "text-gray-300"} hover:text-green-600 transition-colors duration-300`}>
-    <span className="ml-2">Login</span>
-    <div className="mt-2 text-lg text-center">✅</div>
-  </div>
-
-  {step2 && (
-    <>
-      {step1 && <div className="h-0.5 w-[10rem] bg-gradient-to-r from-green-500 to-blue-500"></div>}
-      <div className={`${step1 ? "text-green-500" : "text-gray-300"} hover:text-green-600 transition-colors duration-300`}>
-        <span>Shipping</span>
-        <div className="mt-2 text-lg text-center">✅</div>
+  return (
+    <div className="flex flex-col md:flex-row justify-center items-center gap-6 p-6">
+      {/* Step 1 */}
+      <div className="flex flex-col items-center">
+        <div
+          className={`w-12 h-12 rounded-full flex justify-center items-center text-white ${
+            step1 ? "bg-green-500" : "bg-gray-300"
+          } shadow-md transform transition-transform duration-300 ${
+            step1 && "scale-110 hover:scale-125"
+          }`}
+        >
+          1
+        </div>
+        <span
+          className={`mt-2 text-sm ${
+            step1 ? "text-green-600 font-semibold" : "text-gray-500"
+          }`}
+        >
+          Login
+        </span>
       </div>
-    </>
-  )}
 
-  <>
-    {step1 && step2 && step3 ? (
-      <div className="h-0.5 w-[10rem] bg-gradient-to-r from-green-500 to-blue-500"></div>
-    ) : (
-      ""
-    )}
-
-    <div className={`${step3 ? "text-green-500" : "text-gray-300"} hover:text-green-600 transition-colors duration-300`}>
-      <span className={`${!step3 ? "ml-[10rem]" : ""}`}>Summary</span>
-      {step1 && step2 && step3 ? (
-        <div className="mt-2 text-lg text-center">✅</div>
-      ) : (
-        ""
+      {/* Connector for Step 2 */}
+      {step2 && (
+        <div
+          className={`h-1 w-16 md:w-20 lg:w-24 bg-gradient-to-r md:mb-5 ${
+            step1
+              ? "from-green-500 via-blue-400 to-blue-500"
+              : "from-gray-300 to-gray-400"
+          }`}
+        ></div>
       )}
-    </div>
-  </>
-</div>
 
-    );
-  };
-  
-  export default ProgressSteps;
+      {/* Step 2 */}
+      {step2 && (
+        <div className="flex flex-col items-center">
+          <div
+            className={`w-12 h-12 rounded-full flex justify-center items-center text-white ${
+              step2 ? "bg-blue-500" : "bg-gray-300"
+            } shadow-md transform transition-transform duration-300 ${
+              step2 && "scale-110 hover:scale-125"
+            }`}
+          >
+            2
+          </div>
+          <span
+            className={`mt-2 text-sm ${
+              step2 ? "text-blue-600 font-semibold" : "text-gray-500"
+            }`}
+          >
+            Shipping
+          </span>
+        </div>
+      )}
+
+      {/* Connector for Step 3 */}
+      {step3 && (
+        <div
+          className={`h-1 w-16 md:w-20 lg:w-24 bg-gradient-to-r md:mb-5 ${
+            step2 && step3
+              ? "from-blue-500 via-purple-400 to-purple-500"
+              : "from-gray-300 to-gray-400"
+          }`}
+        ></div>
+      )}
+
+      {/* Step 3 */}
+      <div className="flex flex-col items-center">
+        <div
+          className={`w-12 h-12 rounded-full flex justify-center items-center text-white ${
+            step3 ? "bg-purple-500" : "bg-gray-300"
+          } shadow-md transform transition-transform duration-300 ${
+            step3 && "scale-110 hover:scale-125"
+          }`}
+        >
+          3
+        </div>
+        <span
+          className={`mt-2 text-sm ${
+            step3 ? "text-purple-600 font-semibold" : "text-gray-500"
+          }`}
+        >
+          Summary
+        </span>
+      </div>
+    </div>
+  );
+};
+
+export default ProgressSteps;
