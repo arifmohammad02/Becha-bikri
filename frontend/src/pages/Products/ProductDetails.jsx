@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
@@ -10,18 +10,12 @@ import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 
-import {
-  FaBox,
-  FaClock,
-  FaShoppingCart,
-  FaStar,
-  FaStore,
-} from "react-icons/fa";
+import { FaBox, FaStar, FaStore, FaCartPlus } from "react-icons/fa";
 
-import moment from "moment";
 import HeartIcon from "./HeartIcon";
 import ProductTabs from "./ProductTabs";
 import Ratings from "./Ratings";
+import ProductQuantityControl from "../../components/ProductQuantityControl";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -78,7 +72,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen h-full pt-12 px-6 container mx-auto">
+    <div className="bg-white min-h-screen h-full pt-12 px-3 xs:px-0 container mx-auto">
       <div className="pb-10 ">
         {/* Go Back Link */}
         <div className="py-4">
@@ -99,114 +93,119 @@ const ProductDetails = () => {
           </Message>
         ) : (
           <div className="flex flex-col">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {/* Product Image Section */}
-              <div className="relative w-full border-2  border-gray-300 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="rounded-lg  w-fit max-h-[520px] p-5 transition-transform duration-300 hover:scale-102"
-                />
-                <div className="absolute top-4 right-4 2xl:right-20">
-                  <HeartIcon product={product} />
-                </div>
-              </div>
+            <div className="py-8 bg-white md:py-16 antialiased border border-gray-300 rounded-md overflow-hidden">
+              <div className="max-w-screen-xl px-2 md:px-4 mx-auto 2xl:px-0">
+                <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
+                  <div className="shrink-0 max-w-md lg:max-w-lg mx-auto bg-white overflow-hidden">
+                    <img
+                      className="w-full dark:hidden"
+                      src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
+                      alt=""
+                    />
+                    <img
+                      className="w-full hidden dark:block"
+                      src={product.image}
+                      alt={product.name}
+                    />
+                  </div>
 
-              {/* Product Details Section */}
-              <div className="flex flex-col w-full text-gray-800 py-6">
-                {/* Product Title */}
-                <div>
-                  <h2 className="text-[24px] font-bold text-black">
-                    {isExpanded
-                      ? product.name
-                      : product.name.substring(0, 80) +
-                        (product.name.length > 80 ? "..." : "")}
-                  </h2>
+                  <div className="mt-6 sm:mt-8 lg:mt-0">
+                    <div>
+                      <h1 className="text-xl font-semibold text-black sm:text-2xl">
+                        {isExpanded
+                          ? product.name
+                          : product.name.substring(0, 80) +
+                            (product.name.length > 80 ? "..." : "")}
+                      </h1>
+                      {/* See More / See Less Button */}
+                      {product.name.length > 80 && (
+                        <button
+                          onClick={() => setIsExpanded(!isExpanded)}
+                          className="text-pink-500 text-sm mt-2 hover:underline"
+                        >
+                          {isExpanded ? "See Less" : "See More"}
+                        </button>
+                      )}
+                    </div>
+                    <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
+                      <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl">
+                        BDT-{product.price}
+                      </p>
 
-                  {/* See More / See Less Button */}
-                  {product.name.length > 80 && (
+                      <div className="flex items-center gap-2 mt-2 sm:mt-0">
+                        <Link className="text-sm font-medium leading-none text-gray-900 hover:no-underline">
+                          <h1 className="flex items-center">
+                            <FaStore className="mr-2 text-pink-600" /> Brand:{" "}
+                            {product.brand}
+                          </h1>
+                        </Link>
+                        <Link
+                          href="#"
+                          className="text-sm font-medium leading-none text-gray-900 underline hover:no-underline"
+                        >
+                          <h1 className="flex items-center">
+                            <FaStar className="mr-2 text-pink-600" /> Reviews:{" "}
+                            {product.numReviews}
+                          </h1>
+                        </Link>
+                        <Link>
+                          <h1 className="flex items-center">
+                            <FaBox className="mr-2 text-pink-600" /> In Stock:{" "}
+                            {product.countInStock}
+                          </h1>
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
+                      <Link
+                        title=""
+                        className="flex items-center justify-center w-fit py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                        role="button"
+                      >
+                        <HeartIcon
+                          product={product}
+                          className="w-5 h-5 -ms-2 me-2 text-current"
+                        />
+                      </Link>
+                    </div>
+
+                    <div className="flex flex-col w-fit sm:flex-row sm:items-center sm:space-x-4 my-4 gap-3 sm:gap-0">
+                      <Ratings
+                        value={product.rating}
+                        text={`${product.numReviews} reviews`}
+                      />
+                      <div>
+                        <ProductQuantityControl
+                          qty={qty}
+                          setQty={setQty}
+                          product={product}
+                        />
+                        <ToastContainer /> {/* ToastContainer যোগ করুন */}
+                      </div>
+                    </div>
+
                     <button
-                      onClick={() => setIsExpanded(!isExpanded)}
-                      className="text-pink-500 text-sm mt-2 hover:underline"
+                      onClick={addToCartHandler}
+                      disabled={product.countInStock === 0}
+                      className="text-white mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+                      role="button"
                     >
-                      {isExpanded ? "See Less" : "See More"}
+                      <FaCartPlus className="w-5 h-5 -ms-2 me-2 text-current" />
+                      Add to cart
                     </button>
-                  )}
-                </div>
-                <p className="my-4 text-gray-600 max-w-lg text-[15px]">
-                  {product.description}
-                </p>
-                <p className="text-4xl font-extrabold text-black">
-                  BDT-{product.price}
-                </p>
 
-                <div className="flex flex-wrap mt-6 space-y-4 lg:space-y-0">
-                  {/* Brand and Stock Info */}
-                  <div className="w-full sm:w-1/2">
-                    <h1 className="flex items-center mb-4">
-                      <FaStore className="mr-2 text-pink-600" /> Brand:{" "}
-                      {product.brand}
-                    </h1>
-                    <h1 className="flex items-center mb-4">
-                      <FaClock className="mr-2 text-pink-600" /> Added:{" "}
-                      {moment(product.createAt).fromNow()}
-                    </h1>
-                    <h1 className="flex items-center mb-4">
-                      <FaStar className="mr-2 text-pink-600" /> Reviews:{" "}
-                      {product.numReviews}
-                    </h1>
-                  </div>
-
-                  {/* Ratings and Quantity Info */}
-                  <div className="w-full sm:w-1/2">
-                    <h1 className="flex items-center mb-4">
-                      <FaStar className="mr-2 text-pink-600" /> Ratings:{" "}
-                      {rating}
-                    </h1>
-                    <h1 className="flex items-center mb-4">
-                      <FaShoppingCart className="mr-2 text-pink-600" />{" "}
-                      Quantity: {product.quantity}
-                    </h1>
-                    <h1 className="flex items-center mb-4">
-                      <FaBox className="mr-2 text-pink-600" /> In Stock:{" "}
-                      {product.countInStock}
-                    </h1>
+                    <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
+                    <p className="mb-6 text-gray-500 dark:text-gray-400">
+                      {product.description}
+                    </p>
                   </div>
                 </div>
-
-                {/* Add to Cart Section */}
-                <div className="flex items-center space-x-4 mt-4">
-                  <Ratings
-                    value={product.rating}
-                    text={`${product.numReviews} reviews`}
-                  />
-                  {product.countInStock > 0 && (
-                    <select
-                      value={qty}
-                      onChange={(e) => setQty(e.target.value)}
-                      className="p-2 w-[5rem] rounded-lg text-gray-800 border-2 border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-500"
-                    >
-                      {[...Array(product.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </select>
-                  )}
-                </div>
-
-                <button
-                  onClick={addToCartHandler}
-                  disabled={product.countInStock === 0}
-                  className="bg-pink-600 text-white w-fit py-2 px-6 rounded-lg mt-4 shadow-md hover:bg-pink-700 hover:scale-105 transition-all duration-300 disabled:opacity-50"
-                >
-                  Add To Cart
-                </button>
               </div>
             </div>
 
             {/* Review Section */}
-            <div className="w-full mt-8 bg-gray-100 border border-gray-300 rounded-lg overflow-hidden">
+            <div className="w-full mt-8 bg-gray-100 border border-gray-300 rounded-md overflow-hidden">
               <ProductTabs
                 loadingProductReview={loadingProductReview}
                 userInfo={userInfo}

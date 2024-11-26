@@ -94,11 +94,8 @@ const CategoryList = () => {
 
   return (
     <div>
-      <AdminMenu  />
-      <div
-        className="flex flex-col justify-center md:flex-row min-h-screen bg-gradient-to-r from-gray-900 to-black text-gray-200 
-    shadow-xl pr-3 pl-[80px] sm:pl-[85px] lg:pl-[120px] 2xl:pl-0"
-      >
+      <AdminMenu />
+      <div className="flex flex-col justify-center md:flex-row min-h-screen mt-10">
         <div className="md:w-3/4 p-5 space-y-6">
           <h1 className="text-lg sm:text-2xl md:text-3xl font-semibold text-start md:text-center">
             Manage Categories

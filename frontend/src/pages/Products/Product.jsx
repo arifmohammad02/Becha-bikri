@@ -1,65 +1,68 @@
-import { useState } from "react";
+// import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+// import { addToCart } from "../../redux/features/cart/cartSlice";
 import HeartIcon from "./HeartIcon";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({ product }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const dispatch = useDispatch();
+
+  // Get the cart items from the Redux store
+  // const cartItems = useSelector((state) => state.cart.cartItems);
+  // // Check if the product is already in the cart
+  // const isProductInCart = cartItems.some((item) => item._id === product._id);
+  // const addToCartHandler = () => {
+  //   // Dispatch the action with the product and qty
+  //   dispatch(addToCart({ ...product, qty: 1 }));
+  //   // Show toast notification
+  //   toast.success("Item added to cart!", { position: toast.POSITION.BOTTOM_RIGHT });
+  // };
 
   // Function to truncate the name if more than 4 words
   const truncateName = (name) => {
     const words = name.split(" ");
-    if (words.length > 3 && !isExpanded) {
+    if (words.length > 3) {
       return words.slice(0, 3).join(" ") + "...";
     }
     return name;
   };
 
   return (
-    <div className="relative mt-8">
-      {/* Card container with white background */}
-      <div className="relative bg-white p-2 sm:p-4 rounded-lg shadow-md border border-gray-300 hover:border-blue-500 hover:shadow-xl  hover:scale-102 transition-all duration-300">
-        <div className="p-2 sm:p-4">
-          <div className="w-full relative overflow-hidden rounded-lg">
-            {/* Product Image */}
-            <Link to={`/product/${product._id}`}>
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-[13rem] object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-102"
-              />
-            </Link>
+    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+      <Link to={`/product/${product._id}`}>
+        <img
+          className="p-8 rounded-t-lg"
+          src={product.image}
+          alt={product.name}
+        />
+      </Link>
+      {/* Heart Icon */}
+     <div className="px-5">
+     <HeartIcon  product={product} />
+     </div>
+      <div className="px-5 pb-5">
+        <div className="flex items-center gap-1">
+          <Link to={`/product/${product._id}`}>
+            <h5 className="text-xl font-semibold tracking-tight text-gray-900">
+              {truncateName(product.name)}
+            </h5>
+          </Link>
+        </div>
 
-            {/* Heart Icon */}
-            <HeartIcon
-              product={product}
-              className="absolute top-2 right-2 text-pink-500 hover:text-pink-600"
-            />
-          </div>
+        <div className="flex items-center justify-between">
+          <span className="text-xl font-bold text-gray-900">
+            BDT {product.price}
+          </span>
 
-          {/* Product Details */}
-          <div className="flex flex-col gap-3 items-start mt-4">
-            <Link to={`/product/${product._id}`}>
-              <h2 className="text-gray-800 text-[14px] xl:text-[17px] font-semibold">
-                {truncateName(product.name)}
-              </h2>
-            </Link>
-
-            {/* "See More" or "See Less" button */}
-            {product.name.split(" ").length > 4 && (
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="text-blue-500 text-xs hover:underline"
-              >
-                {isExpanded ? "See Less" : "See More"}
-              </button>
-            )}
-
-            {/* Product Price */}
-            <span className="bg-green-500 text-white px-3 py-1 rounded-lg text-sm font-medium">
-              BDT {product.price}
-            </span>
-          </div>
+          {/* Add to Cart Button */}
+          {/* <button
+            onClick={addToCartHandler}
+            disabled={product.countInStock === 0}
+            className={`text-white ${isProductInCart ? 'bg-green-500' : 'bg-blue-700'} hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+          >
+            {isProductInCart ? "Added to Cart" : "Add to Cart"}
+          </button> */}
         </div>
       </div>
     </div>

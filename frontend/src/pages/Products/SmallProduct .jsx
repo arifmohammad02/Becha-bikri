@@ -15,52 +15,47 @@ const SmallProduct = ({ product }) => {
   };
 
   return (
-    <div className="py-2 md:py-5 ">
-      <div className="sm:p-4 rounded-lg bg-white shadow-md border border-gray-300 hover:border-blue-500 hover:shadow-xl hover:scale-102 transition-all duration-300">
-        <div className="bg-white p-2 sm:p-4 rounded-lg">
-          <div>
-            <div className="relative">
-              <Link
-                to={`/product/${product._id}`}
-                className="rounded-lg overflow-hidden"
-              >
-                {/* Product Image */}
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full object-cover h-[13rem] transition-transform duration-300 ease-in-out transform hover:scale-102"
-                />
-              </Link>
-              {/* Heart Icon */}
-              <HeartIcon product={product} />
-            </div>
-          </div>
+    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+      <Link to={`/product/${product._id}`}>
+        <img
+          className="p-8 rounded-t-lg"
+          src={product.image}
+          alt={product.name}
+        />
+      </Link>
+      {/* Heart Icon */}
+      <div className="px-5">
+      <HeartIcon product={product} />
+      </div>
+      <div className="px-5 pb-5">
+        <div className="flex items-center gap-1">
+          <Link to={`/product/${product._id}`}>
+            <h5 className="text-xl font-semibold tracking-tight text-gray-900">
+              {truncateName(product.name)}
+            </h5>
+          </Link>
 
-          {/* Product Information */}
-          <div className="text-gray-800 mt-4">
-            <Link to={`/product/${product._id}`}>
-              <h2 className="text-[14px] xl:text-[17px] font-semibold">
-                {truncateName(product.name)}
-              </h2>
-            </Link>
+          {/* "See More" or "See Less" button */}
+          {product.name.split(" ").length > 4 && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-blue-500 text-xs hover:underline"
+            >
+              {isExpanded ? "See Less" : "See More"}
+            </button>
+          )}
+        </div>
 
-            {/* Show "See More" or "See Less" button */}
-            {product.name.split(" ").length > 3 && (
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="text-blue-500 text-xs hover:underline mb-2"
-              >
-                {isExpanded ? "See Less" : "See More"}
-              </button>
-            )}
-
-            {/* Product Price */}
-            <div>
-              <span className="bg-green-500 text-white text-xs font-medium px-3 py-1 rounded-lg w-fit">
-                BDT {product.price}
-              </span>
-            </div>
-          </div>
+        <div className="flex items-center justify-between">
+          <span className="text-xl font-bold text-gray-900">
+            BDT {product.price}
+          </span>
+          {/* <Link
+            
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Add to cart
+          </Link> */}
         </div>
       </div>
     </div>

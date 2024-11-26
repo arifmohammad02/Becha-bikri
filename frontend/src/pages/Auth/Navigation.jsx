@@ -112,7 +112,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
                       <span className="text-sm font-semibold">
                         {cartItems?.length > 0 && (
                           <span className="px-1 py-0 text-sm text-white bg-pink-500 rounded-full">
-                            {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                            {cartItems.reduce((acc, ) => acc + item.qty, 0)}
                           </span>
                         )}
                       </span>
