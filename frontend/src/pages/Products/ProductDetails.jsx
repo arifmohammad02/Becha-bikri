@@ -96,12 +96,7 @@ const ProductDetails = () => {
             <div className="py-8 bg-white md:py-16 antialiased border border-gray-300 rounded-md overflow-hidden">
               <div className="max-w-screen-xl px-2 md:px-4 mx-auto 2xl:px-0">
                 <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-                  <div className="shrink-0 max-w-md lg:max-w-lg mx-auto bg-white overflow-hidden">
-                    <img
-                      className="w-full dark:hidden"
-                      src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
-                      alt=""
-                    />
+                  <div className="shrink-0 max-w-md lg:max-w-lg mx-auto bg-white overflow-hidden">            
                     <img
                       className="w-full hidden dark:block"
                       src={product.image}
