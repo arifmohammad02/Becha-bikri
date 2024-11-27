@@ -46,7 +46,7 @@ function App() {
     );
   }
 
-  // Footer দেখানোর জন্য শর্ত
+
   const shouldShowFooter = !["/login", "/register"].includes(location.pathname);
 
   return (

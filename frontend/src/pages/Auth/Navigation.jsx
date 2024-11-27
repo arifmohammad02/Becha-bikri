@@ -87,8 +87,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
       {isMobile && (
         <div className="w-full fixed top-0 left-0 z-50 bg-black px-3 sm:px-0">
           <div className="flex justify-between items-center py-4 container mx-auto text-white">
-            <span className="font-semibold">Menu</span>
-
+            <Link to="/">
+              <span className="font-semibold">MySite</span>
+            </Link>
             {/* User Login / Cart / Favorites */}
             {!userInfo ? (
               <div className="flex gap-4">
@@ -97,6 +98,13 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
                   className="text-white hover:text-blue-500 transition-all duration-300 ease-in-out"
                 >
                   Login
+                </Link>
+                <Link
+                  to="/"
+                  className="flex items-center group hover:text-blue-500 transition-all duration-300 ease-in-out"
+                  onClick={handleItemClick}
+                >
+                  <AiOutlineHome className="flex-none text-white" size={26} />
                 </Link>
                 <Link
                   to="/cart"
@@ -112,7 +120,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
                       <span className="text-sm font-semibold">
                         {cartItems?.length > 0 && (
                           <span className="px-1 py-0 text-sm text-white bg-pink-500 rounded-full">
-                            {cartItems.reduce((acc, ) => acc + item.qty, 0)}
+                            {cartItems.reduce((acc,) => acc + item.qty, 0)}
                           </span>
                         )}
                       </span>
@@ -181,13 +189,12 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
       )}
       {/* Sidebar/Menu */}
       <div
-        className={`${
-          isMobile
-            ? isMenuOpen
-              ? "fixed top-0 left-0 bottom-0 w-64 bg-black z-50 p-4 h-full flex flex-col justify-between"
-              : "hidden"
-            : "lg:hidden fixed top-0 left-0 h-screen transition-all duration-300 ease-in-out bg-black text-white p-4 w-16 lg:w-20 xl:w-24 flex flex-col justify-between z-50"
-        }`}
+        className={`${isMobile
+          ? isMenuOpen
+            ? "fixed top-0 left-0 bottom-0 w-64 bg-black z-50 p-4 h-full flex flex-col justify-between"
+            : "hidden"
+          : "lg:hidden fixed top-0 left-0 h-screen transition-all duration-300 ease-in-out bg-black text-white p-4 w-16 lg:w-20 xl:w-24 flex flex-col justify-between z-50"
+          }`}
       >
         {/* Close Button */}
         {isMenuOpen && (

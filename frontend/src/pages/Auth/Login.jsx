@@ -68,12 +68,12 @@ const Login = () => {
   return (
     <section className="bg-gray-50 dark:bg-gray-900 flex justify-center items-center h-screen">
       <div className="flex justify-center items-center flex-col w-full px-4 py-8 mx-auto lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow dark:border max-w-md dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-6 md:space-y-8">
+        <div className="w-full bg-white rounded-lg shadow dark:border max-w-md">
+          <div className="p-6 space-y-2 border border-gray-300 rounded-md">
             <h1 className="text-2xl font-bold leading-tight text-center text-gray-900 dark:text-white">
               Sign in to your account
             </h1>
-            <form onSubmit={submitHandler} className="space-y-6" action="#">
+            <form onSubmit={submitHandler} className="space-y-2" action="#">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Your email
@@ -107,7 +107,7 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="absolute inset-y-0 right-3 flex items-center dark:text-gray-400 text-white"
+                    className="absolute inset-y-0 right-3 flex items-center dark:text-gray-400 text-black"
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>

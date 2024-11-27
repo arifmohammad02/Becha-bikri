@@ -1,29 +1,24 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
 } from "@redux/api/productApiSlice";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
-// import { addToCart } from "../../redux/features/cart/cartSlice";
 
 import { FaBox, FaStar, FaStore, FaCartPlus } from "react-icons/fa";
 
 import HeartIcon from "./HeartIcon";
 import ProductTabs from "./ProductTabs";
 import Ratings from "./Ratings";
-import ProductQuantityControl from "../../components/ProductQuantityControl";
 import AddToCartButton from "../../components/AddToCartButton";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
-  const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
@@ -67,10 +62,6 @@ const ProductDetails = () => {
     }
   };
 
-  // const addToCartHandler = () => {
-  //   dispatch(addToCart({ ...product, qty }));
-  //   navigate("/cart");
-  // };
 
   return (
     <div className="bg-white min-h-screen h-full pt-12 px-3 xs:px-0 container mx-auto">
@@ -171,26 +162,7 @@ const ProductDetails = () => {
                         value={product.rating}
                         text={`${product.numReviews} reviews`}
                       />
-                      {/* <div>
-                        <ProductQuantityControl
-                          qty={qty}
-                          setQty={setQty}
-                          product={product}
-                        />
-                        <ToastContainer />
-                      </div> */}
                     </div>
-
-                    {/* <button
-                      onClick={addToCartHandler}
-                      disabled={product.countInStock === 0}
-                      className="text-white mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
-                      role="button"
-                    >
-                      <FaCartPlus className="w-5 h-5 -ms-2 me-2 text-current" />
-                      Add to cart
-                    </button> */}
-
                     <div>
                       <AddToCartButton product={product} />
                     </div>

@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash ,FaArrowRight } from "react-icons/fa";
 import { addToCart, removeFromCart } from "../redux/features/cart/cartSlice";
+import { LuShoppingBag } from "react-icons/lu";
+
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -30,8 +32,14 @@ const Cart = () => {
     <div className="pt-12 ">
       <div className="container flex justify-around items-start wrap mx-auto mt-8 pb-12">
         {cartItems.length === 0 ? (
-          <div>
-            Your cart is empty <Link to="/shop">Go To Shop</Link>
+          <div className="flex flex-col items-center gap-4">
+           <p><LuShoppingBag className="w-28 h-28"/></p>
+           <span className="text-[30px] font-medium font-sans text-center">Your cart is empty </span> 
+           <p className=" max-w-96 text-center">Add products while you shop, so they'll be ready for checkout later. </p>
+           <button className="flex items-center gap-3 bg-blue-700 text-white py-3 px-5 rounded-md hover:bg-blue-600 transition-all ease-in-out duration-300">
+           <Link to="/shop">Go To Shop</Link>
+           <FaArrowRight/>
+           </button>
           </div>
         ) : (
           <>

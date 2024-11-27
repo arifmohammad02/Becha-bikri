@@ -77,20 +77,20 @@ const Register = () => {
   };
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 h-screen flex items-center justify-center">
+    <section className="bg-gray-50 dark:bg-gray-900 h-screen flex items-center my-10 justify-center">
       <ToastContainer
         position="top-center"
         closeOnClick
         pauseOnHover
         theme="dark"
       />
-      <div className="flex justify-center items-center flex-col w-full px-4 py-8 mx-auto lg:py-0">
+      <div className="flex justify-center items-center flex-col w-full px-4 mx-auto ">
         <div className="w-full max-w-md bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-6">
+          <div className="p-6 space-y-2 border border-gray-300 rounded-md">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
               Create an Account
             </h1>
-            <form onSubmit={submitHandler} className="space-y-6" action="#">
+            <form onSubmit={submitHandler} className="space-y-2" action="#">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Your Name
@@ -137,7 +137,7 @@ const Register = () => {
                     required
                   />
                   <div
-                    className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-white"
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-black"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -145,7 +145,7 @@ const Register = () => {
                 </div>
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="block mb-2 text-sm font-medium text-gray-900">
                   Confirm Password
                 </label>
                 <div className="relative">
@@ -160,7 +160,7 @@ const Register = () => {
                     required
                   />
                   <div
-                    className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-white"
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-black"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
                     {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
