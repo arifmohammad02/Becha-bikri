@@ -4,20 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 // import { addToCart } from "../../redux/features/cart/cartSlice";
 import HeartIcon from "./HeartIcon";
 import "react-toastify/dist/ReactToastify.css";
+import AddToCartButton from "../../components/AddToCartButton";
 
 const Product = ({ product }) => {
   const dispatch = useDispatch();
 
-  // Get the cart items from the Redux store
-  // const cartItems = useSelector((state) => state.cart.cartItems);
-  // // Check if the product is already in the cart
-  // const isProductInCart = cartItems.some((item) => item._id === product._id);
-  // const addToCartHandler = () => {
-  //   // Dispatch the action with the product and qty
-  //   dispatch(addToCart({ ...product, qty: 1 }));
-  //   // Show toast notification
-  //   toast.success("Item added to cart!", { position: toast.POSITION.BOTTOM_RIGHT });
-  // };
+
 
   // Function to truncate the name if more than 4 words
   const truncateName = (name) => {
@@ -29,10 +21,10 @@ const Product = ({ product }) => {
   };
 
   return (
-    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
-      <Link to={`/product/${product._id}`}>
+    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
+      <Link className="" to={`/product/${product._id}`}>
         <img
-          className="p-8 rounded-t-lg"
+          className="p-5"
           src={product.image}
           alt={product.name}
         />
@@ -55,14 +47,7 @@ const Product = ({ product }) => {
             BDT {product.price}
           </span>
 
-          {/* Add to Cart Button */}
-          {/* <button
-            onClick={addToCartHandler}
-            disabled={product.countInStock === 0}
-            className={`text-white ${isProductInCart ? 'bg-green-500' : 'bg-blue-700'} hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
-          >
-            {isProductInCart ? "Added to Cart" : "Add to Cart"}
-          </button> */}
+          <AddToCartButton product={product} />
         </div>
       </div>
     </div>

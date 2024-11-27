@@ -3,12 +3,11 @@ import { toast } from 'react-toastify';  // Toastify ইমপোর্ট ক�
 import 'react-toastify/dist/ReactToastify.css';  // Toastify CSS স্টাইল ইমপোর্ট করুন
 
 const ProductQuantityControl = ({ qty, setQty, product }) => {
-  // স্টক কন্ট্রোলের জন্য প্লাস বাটনে ক্লিক করা হলে
   const handleAddQuantity = () => {
     if (qty < product.countInStock) {
       setQty(qty + 1);
     } else {
-      toast.error("স্টক শেষ, প্লাস বাটনে ক্লিক করা যাবে না!");  // স্টক শেষ হলে টোস্ট দেখাবে
+      toast.error("স্টক শেষ, প্লাস বাটনে ক্লিক করা যাবে না!"); 
     }
   };
 
@@ -44,7 +43,6 @@ const ProductQuantityControl = ({ qty, setQty, product }) => {
   );
 };
 
-// Toastify কনফিগারেশন
 export const notify = () => toast("অভিনন্দন! আপনি সফলভাবে পণ্যটি যোগ করেছেন!");
 
 export default ProductQuantityControl;

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import HeartIcon from "./HeartIcon";
+import AddToCartButton from "../../components/AddToCartButton";
 
 const SmallProduct = ({ product }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -18,7 +19,7 @@ const SmallProduct = ({ product }) => {
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
       <Link to={`/product/${product._id}`}>
         <img
-          className="p-8 rounded-t-lg"
+          className="p-5"
           src={product.image}
           alt={product.name}
         />
@@ -50,12 +51,7 @@ const SmallProduct = ({ product }) => {
           <span className="text-xl font-bold text-gray-900">
             BDT {product.price}
           </span>
-          {/* <Link
-            
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Add to cart
-          </Link> */}
+          <AddToCartButton product={product} />
         </div>
       </div>
     </div>

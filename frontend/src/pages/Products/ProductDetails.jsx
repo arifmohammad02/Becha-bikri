@@ -8,7 +8,7 @@ import {
 } from "@redux/api/productApiSlice";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
-import { addToCart } from "../../redux/features/cart/cartSlice";
+// import { addToCart } from "../../redux/features/cart/cartSlice";
 
 import { FaBox, FaStar, FaStore, FaCartPlus } from "react-icons/fa";
 
@@ -16,11 +16,12 @@ import HeartIcon from "./HeartIcon";
 import ProductTabs from "./ProductTabs";
 import Ratings from "./Ratings";
 import ProductQuantityControl from "../../components/ProductQuantityControl";
+import AddToCartButton from "../../components/AddToCartButton";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
 
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
@@ -59,17 +60,17 @@ const ProductDetails = () => {
       } else {
         toast.error(
           error?.data?.message ||
-            error.message ||
-            "An unexpected error occurred"
+          error.message ||
+          "An unexpected error occurred"
         );
       }
     }
   };
 
-  const addToCartHandler = () => {
-    dispatch(addToCart({ ...product, qty }));
-    navigate("/cart");
-  };
+  // const addToCartHandler = () => {
+  //   dispatch(addToCart({ ...product, qty }));
+  //   navigate("/cart");
+  // };
 
   return (
     <div className="bg-white min-h-screen h-full pt-12 px-3 xs:px-0 container mx-auto">
@@ -96,9 +97,9 @@ const ProductDetails = () => {
             <div className="py-8 bg-white md:py-16 antialiased border border-gray-300 rounded-md overflow-hidden">
               <div className="max-w-screen-xl px-2 md:px-4 mx-auto 2xl:px-0">
                 <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-                  <div className="shrink-0 max-w-md lg:max-w-lg mx-auto bg-white overflow-hidden">            
+                  <div className="shrink-0 max-w-md lg:max-w-lg mx-auto bg-white overflow-hidden">
                     <img
-                      className="w-full hidden dark:block"
+                      className="w-full"
                       src={product.image}
                       alt={product.name}
                     />
@@ -110,7 +111,7 @@ const ProductDetails = () => {
                         {isExpanded
                           ? product.name
                           : product.name.substring(0, 80) +
-                            (product.name.length > 80 ? "..." : "")}
+                          (product.name.length > 80 ? "..." : "")}
                       </h1>
                       {/* See More / See Less Button */}
                       {product.name.length > 80 && (
@@ -170,17 +171,17 @@ const ProductDetails = () => {
                         value={product.rating}
                         text={`${product.numReviews} reviews`}
                       />
-                      <div>
+                      {/* <div>
                         <ProductQuantityControl
                           qty={qty}
                           setQty={setQty}
                           product={product}
                         />
-                        <ToastContainer /> {/* ToastContainer যোগ করুন */}
-                      </div>
+                        <ToastContainer />
+                      </div> */}
                     </div>
 
-                    <button
+                    {/* <button
                       onClick={addToCartHandler}
                       disabled={product.countInStock === 0}
                       className="text-white mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
@@ -188,7 +189,11 @@ const ProductDetails = () => {
                     >
                       <FaCartPlus className="w-5 h-5 -ms-2 me-2 text-current" />
                       Add to cart
-                    </button>
+                    </button> */}
+
+                    <div>
+                      <AddToCartButton product={product} />
+                    </div>
 
                     <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
                     <p className="mb-6 text-gray-500 dark:text-gray-400">
