@@ -70,12 +70,12 @@ const Login = () => {
       <div className="flex justify-center items-center flex-col w-full px-4 py-8 mx-auto lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border max-w-md">
           <div className="p-6 space-y-2 border border-gray-300 rounded-md">
-            <h1 className="text-2xl font-bold leading-tight text-center text-gray-900 dark:text-white">
+            <h1 className="text-2xl font-bold leading-tight text-center text-gray-900 ">
               Sign in to your account
             </h1>
             <form onSubmit={submitHandler} className="space-y-2" action="#">
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="block mb-2 text-sm font-medium text-gray-900">
                   Your email
                 </label>
                 <input
