@@ -14,13 +14,14 @@ import cookieParser from "cookie-parser";
 // utils
 
 import connectDB from "./config/db.js";
+import connectCloudunary from "./config/cloudinary.js";
 
 dotenv.config();
 const port = process.env.PORT || 5000;
 
 // connect to database
 connectDB();
-
+connectCloudunary();
 // create express app
 const app = express();
 
@@ -38,7 +39,8 @@ app.use("/api/upload", uploadRoutes)
 app.use("/api/orders", orderRoutes)
 
 const __dirname = path.resolve();
-app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 
 
 
