@@ -1,13 +1,13 @@
-import pkg from 'cloudinary';
-const { v2: cloudinary } = pkg;
+// import pkg from 'cloudinary';
+// const { v2: cloudinary } = pkg;
 
-const connectCloudunary = async () => {
-  cloudinary.config({
-        cloud_name: process.env.CLOUDINARY_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_SECRET_KEY
-    });
+// const connectCloudunary = async () => {
+//   cloudinary.config({
+//         cloud_name: process.env.CLOUDINARY_NAME,
+//         api_key: process.env.CLOUDINARY_API_KEY,
+//         api_secret: process.env.CLOUDINARY_SECRET_KEY
+//     });
   
-};
+// };
 
-export default connectCloudunary;
+// export default connectCloudunary;

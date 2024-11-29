@@ -10,18 +10,21 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from 'cors';
+app.use(cors());
+
 
 // utils
 
 import connectDB from "./config/db.js";
-import connectCloudunary from "./config/cloudinary.js";
+// import connectCloudunary from "./config/cloudinary.js";
 
 dotenv.config();
 const port = process.env.PORT || 5000;
 
 // connect to database
 connectDB();
-connectCloudunary();
+// connectCloudunary();
 // create express app
 const app = express();
 
