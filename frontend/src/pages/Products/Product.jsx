@@ -21,7 +21,7 @@ const Product = ({ product }) => {
   };
 
   return (
-    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
+    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
       <Link className="" to={`/product/${product._id}`}>
         <img
           className="p-5"

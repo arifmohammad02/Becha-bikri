@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FaTrash ,FaArrowRight } from "react-icons/fa";
+import { FaTrash, FaArrowRight } from "react-icons/fa";
 import { addToCart, removeFromCart } from "../redux/features/cart/cartSlice";
 import { LuShoppingBag } from "react-icons/lu";
 
@@ -33,13 +33,13 @@ const Cart = () => {
       <div className="container flex justify-around items-start wrap mx-auto mt-8 pb-12">
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center gap-4">
-           <p><LuShoppingBag className="w-28 h-28"/></p>
-           <span className="text-[30px] font-medium font-sans text-center">Your cart is empty </span> 
-           <p className=" max-w-96 text-center">Add products while you shop, so they'll be ready for checkout later. </p>
-           <button className="flex items-center gap-3 bg-blue-700 text-white py-3 px-5 rounded-md hover:bg-blue-600 transition-all ease-in-out duration-300">
-           <Link to="/shop">Go To Shop</Link>
-           <FaArrowRight/>
-           </button>
+            <p><LuShoppingBag className="w-28 h-28" /></p>
+            <span className="text-[30px] font-medium font-sans text-center">Your cart is empty </span>
+            <p className=" max-w-96 text-center">Add products while you shop, so they'll be ready for checkout later. </p>
+            <button className="flex items-center gap-3 bg-blue-700 text-white py-3 px-5 rounded-md hover:bg-blue-600 transition-all ease-in-out duration-300">
+              <Link to="/shop">Go To Shop</Link>
+              <FaArrowRight />
+            </button>
           </div>
         ) : (
           <>
@@ -109,47 +109,33 @@ const Cart = () => {
               </div>
 
               {/* Summary Section as Table */}
-              <div className="flex flex-col pt-5 lg:pt-0 lg:flex-row items-center justify-between">
-                <div className="w-full lg:max-w-[40rem]">
-                  <p className="text-lg font-bold pb-2">Cash on delivery</p>
-                  <p>
-                    {" "}
-                    সর্বোচ্চ ৪-৫ দিন (ঢাকায়) এবং ৫-৭ দিন (ঢাকার বাহিরে) সময়ের
-                    মধ্যে হোম ডেলিভারী করা হয়।
+              <div className="flex flex-col pt-5 lg:pt-0 lg:flex-row items-center justify-between gap-5">
+                <div className="max-w-md">
+                  <p className="text-lg font-bold pb-2 text-gray-800">Cash on Delivery</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    সর্বোচ্চ ৪-৫ দিন (ঢাকায়) এবং ৫-৭ দিন (ঢাকার বাহিরে) সময়ের মধ্যে হোম ডেলিভারী করা হয়।
                   </p>
                 </div>
-                <div className="mt-8 w-full lg:max-w-[40rem] p-2 md:p-4 border-2 border-gray-300 rounded-lg">
-                  <table className="min-w-full bg-white text-black rounded-lg shadow-md border border-gray-300">
+                <div className="w-full border border-gray-200 bg-white">
+                  <table className="w-full text-gray-800">
                     <thead>
-                      <tr className="border-b border-gray-300">
-                        <th className="py-1 md:py-2 px-2 md:px-4 text-xs md:text-xl text-left  text-gray-700">
-                          Total Items
-                        </th>
-                        <th className="py-1 md:py-2 px-2 md:px-4 text-xs md:text-xl text-left text-gray-700">
-                          Total Price
-                        </th>
-                        <th className="py-1 md:py-2 px-2 md:px-4 text-xs md:text-xl text-left text-gray-700">
-                          Checkout
-                        </th>
+                      <tr className="bg-gray-50">
+                        <th className="py-4 px-6 text-left text-sm font-semibold border-b border-gray-200">Total Items</th>
+                        <th className="py-4 px-6 text-left text-sm font-semibold border-b border-gray-200">Total Price</th>
+                        <th className="py-4 px-6 text-left text-sm font-semibold border-b border-gray-200">Checkout</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b border-gray-300 hover:bg-gray-100 transition-colors duration-200">
-                        <td className="py-1 md:py-2 px-2 md:px-4">
+                      <tr className="hover:bg-gray-100 transition-colors">
+                        <td className="py-4 px-6 text-sm font-medium">
                           {cartItems.reduce((acc, item) => acc + item.qty, 0)}
                         </td>
-                        <td className="py-1 md:py-2 px-2 md:px-4 text-[11px] md:text-2xl font-bold">
-                          BDT{" "}
-                          {cartItems
-                            .reduce(
-                              (acc, item) => acc + item.qty * item.price,
-                              0
-                            )
-                            .toFixed(2)}
+                        <td className="py-4 px-6 text-sm font-semibold text-gray-700">
+                          BDT {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
                         </td>
-                        <td className="py-1 md:py-2 px-2 md:px-4">
+                        <td className="py-4 px-6">
                           <button
-                            className="bg-pink-500 py-1 px-2 md:py-2 md:px-4 rounded-md text-[12px] md:text-lg w-full hover:bg-pink-600 transition-colors duration-200 active:bg-pink-700 focus:outline-none"
+                            className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-2 px-6 rounded-lg text-sm font-medium w-full hover:from-green-500 hover:to-blue-600 transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-300"
                             disabled={cartItems.length === 0}
                             onClick={checkoutHandler}
                           >
@@ -161,6 +147,7 @@ const Cart = () => {
                   </table>
                 </div>
               </div>
+
             </div>
           </>
         )}

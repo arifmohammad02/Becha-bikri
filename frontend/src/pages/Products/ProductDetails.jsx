@@ -97,6 +97,9 @@ const ProductDetails = () => {
                   </div>
 
                   <div className="mt-6 sm:mt-8 lg:mt-0">
+                    <h5 className="text-sm text-pink-600 font-semibold font-inter">
+                      Sale!
+                    </h5>
                     <div>
                       <h1 className="text-xl font-semibold text-black sm:text-2xl">
                         {isExpanded
@@ -137,8 +140,11 @@ const ProductDetails = () => {
                         </Link>
                         <Link>
                           <h1 className="flex items-center">
-                            <FaBox className="mr-2 text-pink-600" /> In Stock:{" "}
-                            {product.countInStock}
+                            <FaBox className="mr-2 text-pink-600" />
+                            <p>
+                              Stock:{" "}
+                              {product.countInStock > 0 ? "Available" : "Out of Stock"}
+                            </p>
                           </h1>
                         </Link>
                       </div>
@@ -168,9 +174,25 @@ const ProductDetails = () => {
                     </div>
 
                     <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
-                    <p className="mb-6 text-gray-500 dark:text-gray-400">
-                      {product.description}
-                    </p>
+                    <div className="mt-6">
+                      <h3 className="text-lg font-semibold text-gray-800">
+                        Description
+                      </h3>
+                      <p className="text-gray-600">
+                        {isExpanded
+                          ? product.description
+                          : `${product.description.substring(0, 150)}${product.description.length > 150 ? "..." : ""
+                          }`}
+                      </p>
+                      {product.description.length > 150 && (
+                        <button
+                          className="text-pink-600 text-sm hover:underline mt-2"
+                          onClick={() => setIsExpanded(!isExpanded)}
+                        >
+                          {isExpanded ? "See Less" : "Read More"}
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
